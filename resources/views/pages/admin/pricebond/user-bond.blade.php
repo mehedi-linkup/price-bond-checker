@@ -99,7 +99,8 @@
                     </a>
                 </div>
             </div> --}}
-            <div class="col-md-12">
+
+            {{-- <div class="col-md-12">
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
@@ -110,9 +111,12 @@
                             <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>SL</th>
                                         <th>Lot Number</th>
-                                        <th>Series</th>
+                                        <th>Series No</th>
                                         <th class="text-left">Bond Number</th>
+                                        <th class="text-left">Price</th>
+                                        <th>Status</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -120,10 +124,31 @@
                                 <tbody>
                                     @foreach ($bondlist as $item)
                                     <tr>
-                                        <td>lot no</td>
-                                        <td>Series</td>                                      
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>
+                                            @php
+                                                $lot = \App\Models\Lot::find($item->lot_number);
+                                            @endphp
+                                            {{  @$lot ? $lot->number : 'Unknown' }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $series = \App\Models\BondSeries::find($item->series_no);
+                                            @endphp
+                                            {{ @$series ? $series->series : 'Unknown' }}
+                                        </td>                                      
                                         <td class="text-left">{{ $item->bond_number }}</td>
-                                        <td class="text-left">{{ $item->date }}</td>
+                                        <td class="text-left">{{ $item->price }}</td>
+                                        <td>
+                                            @if($item->status == 'p')
+                                            <span style="background-color: yellow">{{ 'Pending' }}</span>
+                                            @elseif($item->status == 's')
+                                            <span style="background-color: green">{{ 'Sold' }}</span>
+                                            @else
+                                            {{ 'Unknown' }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $item->date }}</td>
                                         <td>
                                             <a href="{{ route('userbond.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
                                             <a href="{{ route('userbond.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -135,7 +160,30 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+
+            <div class="col-md-12">
+                <div class="card my-3">
+                    <div class="card-header">
+                        <i class="fas fa-list mr-1"></i>
+                       Your Lot List
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($lot as $item)
+                            <div class="col-md-3">
+                                <div class="bond-box border">
+                                    <img src="{{ asset('img/bond.webp') }}" alt="" class="img-fluid">
+                                    <p class="text-center m-0 p-3" style="border-top: 1px solid rgba(128, 128, 128, 0.384)">Bundle No: {{ $item->number }}</p>
+                                </div>
+                                <a class="bond-link" href="{{ route('lotsUserBonds', $item->id) }}"></a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </main>

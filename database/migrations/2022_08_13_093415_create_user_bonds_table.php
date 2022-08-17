@@ -15,7 +15,16 @@ class CreateUserBondsTable extends Migration
     {
         Schema::create('user_bonds', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('lot_number')
+            ->constrained('lots')
+            ->onDelete('cascade');
+            $table->foreignId('series_no')
+            ->constrained('bond_series')
+            ->onDelete('cascade');
             $table->string('bond_number');
+            $table->string('price');
+            $table->string('status', 3)->default('p');
+            $table->date('date');
             $table->softDeletes();
             $table->timestamps();
         });

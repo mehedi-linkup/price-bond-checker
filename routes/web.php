@@ -140,6 +140,8 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::get('/userbond/edit/{id}', [UserBondController::class, 'edit'])->name('userbond.edit');
     Route::post('/userbond/update/{id}', [UserBondController::class, 'update'])->name('userbond.update');
     Route::get('/userbond/delete/{id}', [UserBondController::class, 'delete'])->name('userbond.delete');
-    
+
+    Route::get('/lots/userbond/{id}', [UserBondController::class, 'bondinLots'])->name('lotsUserBonds');
+
     Route::get('/matchbond', [joinController::class, 'index'])->name('joint');
 });

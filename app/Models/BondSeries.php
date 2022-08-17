@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BondSeries extends Model
 {
     use HasFactory;
+
+    public function userbond() {
+        return $this->hasMany(UserBond::class);
+    }
 }

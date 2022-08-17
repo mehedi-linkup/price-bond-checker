@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\BondSeries;
 
 class CreateBondSeriesTable extends Migration
 {
@@ -19,10 +18,6 @@ class CreateBondSeriesTable extends Migration
             $table->text('series');
             $table->timestamps();
         });
-         // Create a default one 
-         $bondseries = new BondSeries();
-         $bondseries->series = 'কক, কখ, কগ, কঘ';
-         $bondseries->save();
     }
 
     /**
