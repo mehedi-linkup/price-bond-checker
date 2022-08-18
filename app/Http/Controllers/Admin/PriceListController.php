@@ -45,7 +45,7 @@ class PriceListController extends Controller
             $priceData = PriceList::find($id);
             $priceData->price_sl = $request->price_sl;
             $priceData->amount = $request->amount;
-            $priceData->save();
+            $priceData->update();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
             throw $th;

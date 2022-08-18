@@ -13,9 +13,9 @@ class UserBond extends Model
         return $this->belongsTo(Lot::class);
     }
 
-    public function userbond()
+    public function bondseries()
     {
-        return $this->belongsTo(UserBond::class);
+        return $this->belongsTo(BondSeries::class);
     }
 
 }

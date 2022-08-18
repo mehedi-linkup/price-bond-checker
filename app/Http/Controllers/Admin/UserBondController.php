@@ -7,14 +7,17 @@ use App\Models\BondSeries;
 use App\Models\Lot;
 use Illuminate\Http\Request;
 use App\Models\UserBond;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class UserBondController extends Controller
 {
     public function index() {
         $series = BondSeries::all();
         $lot = Lot::all();
+        $lotwithBond = Lot::with('userbond')->get();
         $bondlist = UserBond::latest()->get();
-        return view('pages.admin.pricebond.user-bond', compact('bondlist', 'series', 'lot'));
+        return view('pages.admin.pricebond.user-bond', compact('bondlist', 'series', 'lot', 'lotwithBond'));
     }
     public function store(Request $request) {
         $request->validate([
@@ -43,7 +46,8 @@ class UserBondController extends Controller
         $bondlist = UserBond::latest()->get();
         $series = BondSeries::all();
         $lot = Lot::all();
-        return view('pages.admin.pricebond.user-bond', compact('bondData', 'bondlist', 'series', 'lot'));
+        $lotwithBond = Lot::with('userbond')->get();
+        return view('pages.admin.pricebond.user-bond', compact('bondData', 'bondlist', 'series', 'lot',  'lotwithBond'));
     }
     public function update(Request $request, $id) {
         $request->validate([
@@ -83,5 +87,21 @@ class UserBondController extends Controller
     public function bondinLots($id) {
         $lot = Lot::with('userbond')->find($id);
         return view('pages.admin.pricebond.user-lot-bond', compact('lot'));
+    }
+
+    public function status(Request $request) {
+        $value = $request->value;
+        try {
+            foreach ($value as $key => $item) {
+                 $userBond = UserBond::find($item);
+                 $userBond->status = 's';
+                 $userBond->update();
+            }
+            return Redirect()->back()->with('success', 'Status Changed!');
+        } catch (\Throwable $th) {
+            // throw $th;
+            // return $th->getMessage();
+            return Redirect()->back()->with('error', 'Status Unchanged!');
+        }
     }
 }

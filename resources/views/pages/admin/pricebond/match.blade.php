@@ -4,7 +4,7 @@
 <main>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 @if($data->count() > 0)
                 <div class="card mt-4">
                     <div class="card-body">
@@ -26,7 +26,7 @@
         </div>
         @if($data->count() > 0)
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
@@ -37,10 +37,12 @@
                             <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>SL</th>
+                                        <th>Prize</th>
+                                        <th>Series</th>
                                         <th class="text-left">Bond No.</th>
-                                        <th>Serial</th>
                                         <th>Amount</th>
+                                        <th>Lot No</th>
+                                        <th>Status</th>
                                         <th>Draw No.</th>
                                         <th>Draw Date</th>
                                     </tr>
@@ -49,12 +51,22 @@
                                     @foreach ($data as $item)
                                     @php
                                         $pricelist = \App\Models\PriceList::find($item->price_sl_id);
+                                        $banglaSeries = \App\Models\BondSeries::find($item->series_no);
+                                        $lotno = \App\Models\Lot::find($item->lot_number);
                                     @endphp
                                     <tr class="text-success">
-                                        <td class="text-dark">{{ $loop->index + 1 }}</td>
+                                        <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}<i><span class="th">Th</span></i></td>
+                                        <td>{{ @$banglaSeries ? $banglaSeries->series : 'Unknown' }}</td>
                                         <td class="text-left">{{ $item->bond_number }}</td>
-                                        <td class="text-left"><span>{{ @$pricelist ? $pricelist->price_sl.'Th' : 'Unknown'}}</span></td>
                                         <td>{{ @$pricelist ? $pricelist->amount : 'Unknown'}}</td>
+                                        <td>{{ $lotno->number }}</td>
+                                        <td>
+                                            @if($item->status == 's')
+                                            <span class="badge badge-success">Sold</span>
+                                            @else
+                                            <span class="badge badge-warning">Unsold</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->draw_No }}</td>
                                         <td>{{ date('F j, Y',strtotime($item->draw_date)) }}</td>
                                     </tr>

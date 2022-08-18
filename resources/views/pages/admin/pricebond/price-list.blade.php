@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'list-list', 'title' => 'Add list List'])
+@extends('layouts.admin-master', ['pageName'=> 'price-list', 'title' => 'Add list List'])
 @section('admin-content')
 
 <main>

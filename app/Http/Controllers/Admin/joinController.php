@@ -15,4 +15,9 @@ class joinController extends Controller
         return view('pages.admin.pricebond.match', compact('data'));
     }
 
+    public function drawWithLot($id) {
+        $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('lot_number', $id)->get();
+        return view('pages.admin.pricebond.match', compact('data'));
+    }
+
 }

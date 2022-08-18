@@ -10400,3 +10400,12 @@ body {
   right: 0;
   bottom: 0;
 }
+.th_parent {
+  position: relative;
+}
+.th {
+  color: rgba(255, 0, 43, 0.87);
+  position: absolute;
+  top: 0;
+  font-weight: 600;
+}

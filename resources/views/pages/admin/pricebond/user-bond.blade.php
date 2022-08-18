@@ -92,14 +92,13 @@
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3">
                 <div class="card my-3">
-                    <a href="{{ route('joint') }}" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-white">
-                        Draw
+                    <a href="{{ route('draw') }}" target="_blank" rel="noopener noreferrer" class="btn btn-bg btn-warning">
+                        Overall Draw
                     </a>
                 </div>
-            </div> --}}
-
+            </div>
             {{-- <div class="col-md-12">
                 <div class="card my-3">
                     <div class="card-header">
@@ -170,14 +169,19 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            @foreach($lot as $item)
-                            <div class="col-md-3">
+                            @foreach($lotwithBond as $item)
+                            @if($item->userbond->count() > 0)
+                            <div class="col-md-3 py-2">
                                 <div class="bond-box border">
                                     <img src="{{ asset('img/bond.webp') }}" alt="" class="img-fluid">
-                                    <p class="text-center m-0 p-3" style="border-top: 1px solid rgba(128, 128, 128, 0.384)">Bundle No: {{ $item->number }}</p>
+                                    <p class="text-center m-0 p-3" style="border-top: 1px solid rgba(128, 128, 128, 0.384)">
+                                        Bundle No: {{ $item->number }}
+                                        <span class="text-success text-center">(Items {{ $item->userbond->count() }})</span>
+                                    </p>
                                 </div>
                                 <a class="bond-link" href="{{ route('lotsUserBonds', $item->id) }}"></a>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>

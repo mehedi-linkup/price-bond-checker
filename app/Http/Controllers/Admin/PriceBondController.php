@@ -20,7 +20,7 @@ class PriceBondController extends Controller
         $request->validate([
             'draw_No' => 'required|numeric|digits_between:2,3',
             'price_sl_id' => 'numeric',
-            'bond_number' => 'required|numeric|digits_between:6,7',
+            'bond_number' => 'required|numeric|digits:7|unique:price_winners',
             'draw_date' => 'required'
         ]);
         try {            

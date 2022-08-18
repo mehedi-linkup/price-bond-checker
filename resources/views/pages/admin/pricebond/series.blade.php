@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'Bond Series', 'title' => 'Add Bond Series'])
+@extends('layouts.admin-master', ['pageName'=> 'bond-series', 'title' => 'Add Bond Series'])
 @section('admin-content')
 <main>
     <div class="container-fluid">

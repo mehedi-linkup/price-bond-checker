@@ -2,34 +2,39 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
-                </a>
-                <a class="nav-link" href="{{ route('lot') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-dolly-flatbed"></i></div>
-                    Purchase Lot
-                </a>
-                <a class="nav-link" href="{{ route('bond-series') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-ad"></i></div>
-                    Bond Series
-                </a>
-                <a class="nav-link" href="{{ route('price-list') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-money-check"></i></div>
-                    Price List
-                </a>
                 <a class="nav-link" href="{{ route('price-winner') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-money-bill"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-trophy"></i></div>
                     Winner List
                 </a>
                 <a class="nav-link" href="{{ route('userbond') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                     Purchase Bonds
                 </a>
-                <a class="nav-link" href="{{ route('joint') }}">
+                <a class="nav-link" href="{{ route('draw') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-award"></i></div>
-                    Matched Serial
+                    Draw Result
                 </a>
+                <a class="nav-link {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                    Settings
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'show' : '') }}" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ route('lot') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Lot
+                        </a> 
+                        <a class="nav-link" href="{{ route('bond-series') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Series
+                        </a> 
+                        <a class="nav-link" href="{{ route('price-list') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Price
+                        </a> 
+                    </nav>
+                </div>
                 {{-- <a class="nav-link {{ ($pageName == 'content' || $pageName == 'service' || $pageName == 'category' || $pageName == 'subcategory' || $pageName == 'management' || $pageName == 'gallery' || $pageName == 'product' || $pageName == 'partner' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Web Content

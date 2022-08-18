@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="col-xl-3 col-md-6">
+            {{-- <div class="col-xl-3 col-md-6">
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Product Category</div>
@@ -42,8 +42,8 @@
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
+            </div> --}}
+            {{-- <div class="col-xl-3 col-md-6">
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Product Sub Category</div>
@@ -54,8 +54,8 @@
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
+            </div> --}}
+            {{-- <div class="col-xl-3 col-md-6">
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Total Product</div>
@@ -66,7 +66,7 @@
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </main>

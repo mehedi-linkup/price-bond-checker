@@ -4,7 +4,7 @@
 <main>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card my-3">
                     <div class="card-header">
                         @if(@isset($winnerData))
@@ -17,13 +17,13 @@
                     <div class="card-body">
                         <form action="{{ (@$winnerData) ? route('price-winner.update', $winnerData->id) : route('price-winner.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
+                            <div class="row mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="draw_No"> Draw Number <span class="text-danger">*</span> </label>
                                     <input type="number" name="draw_No" value="{{ @$winnerData ? $winnerData->draw_No : old('draw_No') }}" class="form-control form-control-sm mb-2" id="draw_No" placeholder="Draw Number">
                                     @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
-
-
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="price_sl" class="mb-2"> Price Serial <span class="text-danger">*</span> </label>
                                     <select name="price_sl_id" class="form-control form-control-sm mb-2">
                                         @if(@$winnerData)
@@ -42,12 +42,13 @@
                                         @endif
                                     </select>
                                     @error('price_sl_id') <span style="color: red">{{$message}}</span> @enderror
-
-
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="bond_number"> Bond Number <span class="text-danger">*</span> </label>
                                     <input type="number" name="bond_number" value="{{ @$winnerData ? $winnerData->bond_number : old('bond_number')}}" class="form-control form-control-sm mb-2" id="bond_number" placeholder="Bond Number">
                                     @error('bond_number') <span style="color: red">{{$message}}</span> @enderror
-
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="draw_date">Draw Date</label>
                                     <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : '2022-07-31'}}" min="2022-01-31" max="2022-10-31">
                                     @error('draw_date') <span style="color: red">{{$message}}</span> @enderror
@@ -56,8 +57,12 @@
                             
                             <div class="clearfix border-top">
                                 <div class="float-md-right mt-2">
+                                    @if(@$winnerData)
+                                    <a href="{{ route('price-winner') }}" class="btn btn-dark btn-sm">Back</a>
+                                    @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
-                                    <button type="submit" class="btn btn-info btn-sm">{{(@$winnerData)?'Update':'Create'}}</button>
+                                    @endif
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$winnerData)?'Update':'Create'}}</button>
                                 </div>
                             </div>
                         </form>
@@ -76,9 +81,9 @@
                             <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Draw No</th>
+                                        {{-- <th>ID</th> --}}
                                         <th>Price Serial</th>
+                                        <th>Draw No</th>
                                         <th>Bond Number</th>
                                         <th>Draw Date</th>
                                         <th>Action</th>
@@ -87,18 +92,18 @@
                                 <tbody>
                                     @foreach ($winner as $item)
                                     <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $item->draw_No }}</td>
-                                        <td>
+                                        {{-- <td>{{ $loop->index + 1 }}</td> --}}
+                                        <td class="th_parent">
                                             @php
                                                 $pricesl = \App\Models\PriceList::where('id', $item->price_sl_id)->first();
                                             @endphp
                                             @if($pricesl)
-                                            {{ $pricesl->price_sl."th" }}
+                                            {{ $pricesl->price_sl }}<i><span class="th">Th</span></i>
                                             @else
                                             {{ 'Unknown' }}
                                             @endif
                                         </td>
+                                        <td>{{ $item->draw_No }}</td>
                                         <td>{{ $item->bond_number }}</td>
                                         <td>{{ $item->draw_date }}</td>
                                         <td>

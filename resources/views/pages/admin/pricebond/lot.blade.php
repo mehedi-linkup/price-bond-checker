@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'Lot Number', 'title' => 'Add Lot Number'])
+@extends('layouts.admin-master', ['pageName'=> 'lot', 'title' => 'Add Lot Number'])
 @section('admin-content')
 <main>
     <div class="container-fluid">

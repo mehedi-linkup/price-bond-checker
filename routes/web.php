@@ -143,5 +143,8 @@ Route::group(['middleware' => ['auth']] , function(){
 
     Route::get('/lots/userbond/{id}', [UserBondController::class, 'bondinLots'])->name('lotsUserBonds');
 
-    Route::get('/matchbond', [joinController::class, 'index'])->name('joint');
+    Route::get('/draw', [joinController::class, 'index'])->name('draw');
+    Route::get('/draw-lot/{id}', [joinController::class, 'drawWithLot'])->name('draw-lot');
+
+    Route::post('/status-change', [UserBondController::class, 'status'])->name('status');
 });

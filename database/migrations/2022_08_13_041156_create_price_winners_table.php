@@ -17,7 +17,8 @@ class CreatePriceWinnersTable extends Migration
             $table->id();
             $table->tinyInteger('draw_No')->unsigned();
             $table->foreignId('price_sl_id')
-                   ->constrained('price_lists');
+                   ->constrained('price_lists')
+                   ->onDelete('cascade');
             $table->string('bond_number');
             $table->date('draw_date');
             $table->softDeletes();
