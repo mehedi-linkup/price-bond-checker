@@ -9,7 +9,6 @@
                     <div class="card-header">
                         @if(@isset($priceData))
                         <i class="fas fa-edit mr-1"></i>Update Price List
-                        
                         @else
                         <i class="fas fa-plus mr-1"></i>Add Price List
                         @endif
@@ -32,7 +31,7 @@
                             <div class="clearfix border-top">
                                 <div class="float-md-right mt-2">
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
-                                    <button type="submit" class="btn btn-info btn-sm">{{(@$priceData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$priceData)?'Update':'Create'}}</button>
                                 </div>
                             </div>
                         </form>
@@ -40,7 +39,7 @@
                 </div>
 
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>

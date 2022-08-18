@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="draw_date">Draw Date</label>
-                                    <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : '2022-07-31'}}" min="2022-01-31" max="2022-10-31">
+                                    <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : date('Y-m-d') }}" min="2022-01-31" max="2022-10-31">
                                     @error('draw_date') <span style="color: red">{{$message}}</span> @enderror
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$winnerData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$winnerData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

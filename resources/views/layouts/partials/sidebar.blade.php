@@ -10,6 +10,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                     Purchase Bonds
                 </a>
+                <a class="nav-link" href="#">
+                    <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>
+                    Sell Bonds
+                </a>
                 <a class="nav-link" href="{{ route('draw') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-award"></i></div>
                     Draw Result

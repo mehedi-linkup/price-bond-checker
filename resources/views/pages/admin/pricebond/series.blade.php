@@ -18,7 +18,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="series" class="mb-2"> Bond Serial <span class="text-danger">*</span> </label>
+                                    <label for="series" class="mb-2"> Bond Series <span class="text-danger">*</span> </label>
                                     <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
                                     @error('series') <span style="color: red">{{$message}}</span><br> @enderror
                                 </div>
@@ -51,7 +51,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Bondseries</th>
+                                        <th>Bond Series</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

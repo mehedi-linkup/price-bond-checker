@@ -16,7 +16,7 @@
                         <div class="row mb-2">
                             <div class="col-md-6 mb-2">
                                 <label for="purchase_date"> Entry Date <span class="text-danger">*</span> </label>
-                                <input type="date" name="date" value="{{ @$bondData ? $bondData->date : '2022-07-31' }}" class="form-control form-control-sm mb-2" id="purchase_date">
+                                <input type="date" name="date" value="{{ @$bondData ? $bondData->date : date('Y-m-d') }}" class="form-control form-control-sm mb-2" id="purchase_date">
                                 @error('date') <span style="color: red">{{$message}}</span> @enderror
                             </div>
                             <div class="col-md-6 mb-2">
@@ -84,7 +84,7 @@
                                 @else
                                 <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                 @endif
-                                <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$bondData)?'Update':'Create'}}</button>
+                                <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$bondData)?'Update':'Save'}}</button>
                             </div>
                         </div>
                     </form>
