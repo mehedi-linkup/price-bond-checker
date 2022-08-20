@@ -10,12 +10,11 @@ class UserBond extends Model
     use HasFactory;
     public function lot()
     {
-        return $this->belongsTo(Lot::class);
+        return $this->belongsTo(Lot::class, 'lot_number', 'id');
     }
 
     public function bondseries()
     {
-        return $this->belongsTo(BondSeries::class);
+        return $this->belongsTo(BondSeries::class, 'series_no', 'id');
     }
-
 }

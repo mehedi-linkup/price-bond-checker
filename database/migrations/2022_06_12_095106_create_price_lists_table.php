@@ -15,7 +15,7 @@ class CreatePriceListsTable extends Migration
     {
         Schema::create('price_lists', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('price_sl')->unsigned();
+            $table->Integer('price_sl')->unsigned();
             $table->decimal('amount');
             $table->softDeletes();
             $table->timestamps();

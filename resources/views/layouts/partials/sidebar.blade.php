@@ -14,16 +14,33 @@
                     <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>
                     Sell Bonds
                 </a>
-                <a class="nav-link" href="{{ route('draw') }}">
+                {{-- <a class="nav-link" href="{{ route('draw') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-award"></i></div>
                     Draw Result
+                </a> --}}
+                <a class="nav-link {{ ($pageName == 'report-all' || $pageName == 'report-result' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                    <div class="sb-nav-link-icon"><i class="fas fa-flag-checkered"></i></div>
+                    Report
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <a class="nav-link {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                <div class="collapse {{ ($pageName == 'report-all' || $pageName == 'report-result' ? 'show' : '') }}" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ route('report') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                            All Bond
+                        </a> 
+                        <a class="nav-link" href="{{ route('report.result') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                            Draw Result
+                        </a> 
+                    </nav>
+                </div>
+                <a class="nav-link {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
                     <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                     Settings
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'show' : '') }}" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div class="collapse {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' ? 'show' : '') }}" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('lot') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>

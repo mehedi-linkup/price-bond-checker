@@ -19,6 +19,13 @@
                             @csrf
                             <div class="row mb-2">
                                 <div class="col-md-6 mb-2">
+                                    {{-- <div class="form-group row">
+                                        <label for="draw_No" class="col-sm-2 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                          <input type="number" class="form-control form-control-sm" id="inputEmail3">
+                                          @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
+                                        </div>
+                                    </div> --}}
                                     <label for="draw_No"> Draw Number <span class="text-danger">*</span> </label>
                                     <input type="number" name="draw_No" value="{{ @$winnerData ? $winnerData->draw_No : old('draw_No') }}" class="form-control form-control-sm mb-2" id="draw_No" placeholder="Draw Number">
                                     @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
@@ -28,16 +35,16 @@
                                     <select name="price_sl_id" class="form-control form-control-sm mb-2">
                                         @if(@$winnerData)
                                         @foreach($list as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_sl_id ? 'selected' : '' }} >{{ $item->price_sl }}th</option>
+                                        <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_sl_id ? 'selected' : '' }} >{{ $item->price_sl }}</option>
                                         @endforeach
                                         @elseif(old('price_sl_id'))
                                         @foreach($list as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == old('price_sl_id') ? 'selected' : '' }}>{{ $item->price_sl }}th</option>
+                                        <option value="{{ $item->id }}" {{ $item->id == old('price_sl_id') ? 'selected' : '' }}>{{ $item->price_sl }}</option>
                                         @endforeach
                                         @else
                                         <option value="">Select Serial</option>
                                         @foreach($list as $item)
-                                        <option value="{{ $item->id }}">{{ $item->price_sl }}th</option>
+                                        <option value="{{ $item->id }}">{{ $item->price_sl }}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -98,7 +105,7 @@
                                                 $pricesl = \App\Models\PriceList::where('id', $item->price_sl_id)->first();
                                             @endphp
                                             @if($pricesl)
-                                            {{ $pricesl->price_sl }}<i><span class="th">Th</span></i>
+                                            {{ $pricesl->price_sl }}<i><span class="th"></span></i>
                                             @else
                                             {{ 'Unknown' }}
                                             @endif

@@ -146,5 +146,9 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::get('/draw', [joinController::class, 'index'])->name('draw');
     Route::get('/draw-lot/{id}', [joinController::class, 'drawWithLot'])->name('draw-lot');
 
+    Route::get('/report', [joinController::class, 'report'])->name('report');
+    Route::get('/report-result', [joinController::class, 'reportResult'])->name('report.result');
+    Route::post('/report-load', [joinController::class, 'reportLoad'])->name('report.load');
+
     Route::post('/status-change', [UserBondController::class, 'status'])->name('status');
 });

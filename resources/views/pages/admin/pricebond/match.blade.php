@@ -55,7 +55,7 @@
                                         $lotno = \App\Models\Lot::find($item->lot_number);
                                     @endphp
                                     <tr class="text-success">
-                                        <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}<i><span class="th">Th</span></i></td>
+                                        <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}<i><span class="th"></span></i></td>
                                         <td>{{ @$banglaSeries ? $banglaSeries->series : 'Unknown' }}</td>
                                         <td class="text-left">{{ $item->bond_number }}</td>
                                         <td>{{ @$pricelist ? $pricelist->amount : 'Unknown'}}</td>
