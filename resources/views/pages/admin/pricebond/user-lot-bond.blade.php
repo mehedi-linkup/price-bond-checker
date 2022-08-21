@@ -50,14 +50,14 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>
                                             @php
-                                            $lotitem = \App\Models\lot::find($item->lot_number);
+                                            $lotitem = \App\Models\lot::find($item->lot_id);
                                             
                                             @endphp
                                             {{ $lotitem->number }}
                                         </td>
                                         <td>
                                             @php
-                                                $seriesitem = \App\Models\BondSeries::find($item->series_no);
+                                                $seriesitem = \App\Models\BondSeries::find($item->series_id);
                                             @endphp
                                             {{ $seriesitem->series }}
                                         </td>                                      

@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\LotController;
+use App\Http\Controllers\Admin\DrawController;
+use App\Http\Controllers\Admin\joinController;
 use App\Http\Controllers\Admin\QueryController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PartnerController;
@@ -19,8 +23,6 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\AuthenticationController;
 use App\Http\Controllers\Admin\CompanyProfileController;
-use App\Http\Controllers\Admin\joinController;
-use App\Http\Controllers\Admin\LotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +119,18 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::post('/price-list/update/{id}', [PriceListController::class, 'update'])->name('price-list.update');
     Route::get('/price-list/delete/{id}', [PriceListController::class, 'delete'])->name('price-list.delete');
 
+    Route::get('/draw-all', [DrawController::class, 'index'])->name('draw.all');
+    Route::post('/draw/store', [DrawController::class, 'store'])->name('draw.store');
+    Route::get('/draw/edit/{id}', [DrawController::class, 'edit'])->name('draw.edit');
+    Route::post('/draw/update/{id}', [DrawController::class, 'update'])->name('draw.update');
+    Route::get('/draw/delete/{id}', [DrawController::class, 'delete'])->name('draw.delete');
+
+    Route::get('/client-all', [ClientController::class, 'index'])->name('client.all');
+    Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/client/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+    Route::post('/client/update/{id}', [ClientController::class, 'update'])->name('client.update');
+    Route::get('/client/delete/{id}', [ClientController::class, 'delete'])->name('client.delete');
+
     Route::get('bond-series', [BondSeriesController::class, 'index'])->name('bond-series');
     Route::post('/bond-series/store', [BondSeriesController::class, 'store'])->name('bond-series.store');
     Route::get('/bond-series/edit/{id}', [BondSeriesController::class, 'edit'])->name('bond-series.edit');
@@ -141,10 +155,18 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::post('/userbond/update/{id}', [UserBondController::class, 'update'])->name('userbond.update');
     Route::get('/userbond/delete/{id}', [UserBondController::class, 'delete'])->name('userbond.delete');
 
+    //User Bond By Lot
+    Route::get('/lots/userbond/{id}', [UserBondController::class, 'bondinLots'])->name('lotsUserBonds');
+
+    //User Bond By Sell
     Route::get('/lots/userbond/{id}', [UserBondController::class, 'bondinLots'])->name('lotsUserBonds');
 
     Route::get('/draw', [joinController::class, 'index'])->name('draw');
     Route::get('/draw-lot/{id}', [joinController::class, 'drawWithLot'])->name('draw-lot');
+
+    Route::get('/sales', [UserBondController::class, 'sales'])->name('sales');
+    Route::get('/saleswithlot/{id?}', [UserBondController::class, 'salesWithLot'])->name('saleswithlot');
+
 
     Route::get('/report', [joinController::class, 'report'])->name('report');
     Route::get('/report-result', [joinController::class, 'reportResult'])->name('report.result');

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Admin | {{ $title ?? '' }}</title>
         {{-- <link rel="shortcut icon" href="{{ $content->logo }}" type="image/x-icon"> --}}
         <link href="{{ asset('css/admin-styles.css') }}" rel="stylesheet" />

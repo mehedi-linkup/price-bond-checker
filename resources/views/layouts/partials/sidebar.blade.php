@@ -10,7 +10,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                     Purchase Bonds
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('sales') }}">
                     <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>
                     Sell Bonds
                 </a>
@@ -53,7 +53,15 @@
                         <a class="nav-link" href="{{ route('price-list') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
                             Add Price
-                        </a> 
+                        </a>
+                        <a class="nav-link" href="{{ route('draw.all') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Draw
+                        </a>
+                        <a class="nav-link" href="{{ route('client.all') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Client
+                        </a>
                     </nav>
                 </div>
                 {{-- <a class="nav-link {{ ($pageName == 'content' || $pageName == 'service' || $pageName == 'category' || $pageName == 'subcategory' || $pageName == 'management' || $pageName == 'gallery' || $pageName == 'product' || $pageName == 'partner' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">

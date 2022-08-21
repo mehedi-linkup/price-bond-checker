@@ -15,8 +15,10 @@ class CreatePriceWinnersTable extends Migration
     {
         Schema::create('price_winners', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('draw_No')->unsigned();
-            $table->foreignId('price_sl_id')
+            $table->foreignId('draw_id')
+                    ->constrained('draws')
+                    ->onDelete('cascade');
+            $table->foreignId('price_list_id')
                    ->constrained('price_lists')
                    ->onDelete('cascade');
             $table->string('bond_number');

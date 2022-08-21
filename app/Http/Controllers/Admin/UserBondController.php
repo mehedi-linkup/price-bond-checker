@@ -21,24 +21,25 @@ class UserBondController extends Controller
     }
     public function store(Request $request) {
         $request->validate([
-            'bond_number' => 'required|numeric|digits:7',
             'date' => 'required|date',
-            'lot_number' => 'required',
-            'series_no' => 'required',
+            'lot_id' => 'required',
+            'series_id' => 'required',
+            'bond_number' => 'required|numeric|digits:7',
             'price' => 'required|numeric|digits_between:2,3'
         ]);
+        
         try {            
             $userBond = new UserBond();
             $userBond->bond_number = $request->bond_number;
             $userBond->date = $request->date;
-            $userBond->lot_number = $request->lot_number;
-            $userBond->series_no = $request->series_no;
+            $userBond->lot_id = $request->lot_id;
+            $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
             $userBond->save();
             return Redirect()->back()->with('success', 'Insert Success!');
         } catch (\Throwable $th) {
-            // throw $th;
-            return Redirect()->back()->with('error', 'Insert Failed!');
+            throw $th;
+            // return Redirect()->back()->with('error', 'Insert Failed!');
         }
     }
     public function edit($id) {
@@ -89,7 +90,27 @@ class UserBondController extends Controller
         return view('pages.admin.pricebond.user-lot-bond', compact('lot'));
     }
 
+    public function sales() {
+        $series = BondSeries::all();
+        $lot = Lot::all();
+        $bondlist = UserBond::latest()->get();
+        return view('pages.admin.pricebond.sales', compact('bondlist', 'series', 'lot'));
+    }
+    public function salesWithLot($id = null) {
+        if($id == null) {
+            $lot = Lot::with('userbond')->latest()->get();
+            $data = ['data' => $lot];
+            // return response()->json($data);
+            return view('pages.admin.loadpage.saleswithlot', compact('lot'));
+        }
+        $id = [$id];
+        $lot = Lot::with('userbond')->find($id);
+        // $data = ['data' => $lot];
+        // return response()->json($lot[0]->userbond);
+        return view('pages.admin.loadpage.saleswithlot', compact('lot'));
+    }
     public function status(Request $request) {
+        return $request;
         $value = $request->value;
         try {
             foreach ($value as $key => $item) {

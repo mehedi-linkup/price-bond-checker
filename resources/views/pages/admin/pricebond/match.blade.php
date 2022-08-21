@@ -37,14 +37,17 @@
                             <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Prize</th>
-                                        <th>Series</th>
-                                        <th class="text-left">Bond No.</th>
-                                        <th>Amount</th>
-                                        <th>Lot No</th>
-                                        <th>Status</th>
+                                        <th>Sl</th>
+                                        <th>Win Series</th>
+                                        <th>Win No.</th>
                                         <th>Draw No.</th>
                                         <th>Draw Date</th>
+                                        <th>Win Position</th>
+                                        <th>Win Amount</th>
+                                        <th>My No.</th>
+                                        <th>Lot No.</th>
+                                        <th>Status</th>
+                                        <th>Purchase Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,10 +58,14 @@
                                         $lotno = \App\Models\Lot::find($item->lot_number);
                                     @endphp
                                     <tr class="text-success">
-                                        <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}<i><span class="th"></span></i></td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ @$banglaSeries ? $banglaSeries->series : 'Unknown' }}</td>
-                                        <td class="text-left">{{ $item->bond_number }}</td>
+                                        <td>{{ $item->bond_number }}</td>
+                                        <td>{{ $item->draw_No }}</td>
+                                        <td>{{ date('F j, Y',strtotime($item->draw_date)) }}</td>
+                                        <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}<i><span class="th"></span></i></td>
                                         <td>{{ @$pricelist ? $pricelist->amount : 'Unknown'}}</td>
+                                        <td>{{ (@$banglaSeries ? $banglaSeries->series : 'Unknown').''.$item->bond_number }}</td>
                                         <td>{{ $lotno->number }}</td>
                                         <td>
                                             @if($item->status == 's')
@@ -67,8 +74,7 @@
                                             <span class="badge badge-warning">Unsold</span>
                                             @endif
                                         </td>
-                                        <td>{{ $item->draw_No }}</td>
-                                        <td>{{ date('F j, Y',strtotime($item->draw_date)) }}</td>
+                                        <td>{{ $item->date }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

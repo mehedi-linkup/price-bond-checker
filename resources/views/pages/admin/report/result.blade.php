@@ -118,7 +118,6 @@
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Win Series</th>
                                         <th>Win No</th>
                                         <th>Draw No</th>
                                         <th>Draw Date</th>
@@ -139,13 +138,12 @@
                                     @endphp
                                     <tr class="text-success">
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ @$banglaSeries ? $banglaSeries->series : 'Unknown' }}</td>
                                         <td>{{ $item->bond_number }}</td>
                                         <td>{{ $item->draw_No }}</td>
                                         <td>{{ date('F j, Y',strtotime($item->draw_date)) }}</td>
                                         <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}</td>
                                         <td>{{ @$pricelist ? $pricelist->amount : 'Unknown'}}</td>
-                                        <td>{{ $item->bond_number }}</td>
+                                        <td>{{ @$banglaSeries ? $banglaSeries->series : 'Unknown'}}{{$item->bond_number }}</td>
                                         <td>{{ $lotno->number }}</td>
                                         <td>
                                             @if($item->status == 's')
@@ -175,9 +173,9 @@
             $('#lot_no_column').show();
             $('#draw_no_column').show();
             $('#status_column').show();
-        } else if(value == 'model') {
-            $('#model_column').show();
-            $('#category_column').hide();
+        // } else if(value == 'model') {
+        //     $('#model_column').show();
+        //     $('#category_column').hide();
         } else {
             $('#lot_no_column').hide();
             $('#draw_no_column').hide();

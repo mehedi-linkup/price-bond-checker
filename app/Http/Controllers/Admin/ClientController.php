@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use Illuminate\Http\Request;
-use App\Models\Lot;
 
-class LotController extends Controller
+class ClientController extends Controller
 {
     public function index() {
-        $lot = Lot::get();
-        return view('pages.admin.pricebond.lot', compact('lot'));
+        $client = Client::latest()->get();
+        return view('pages.admin.pricebond.client', compact('client'));
     }
     
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required|unique:lots|numeric|digits_between:1,5',
+            'name' => 'required|max:100',
         ]);
         try {
-            $lot = new Lot();
-            $lot->number = $request->number;
-            $lot->save();
+            $client = new Client();
+            $client->name = $request->name;
+            $client->save();
             return Redirect()->back()->with('success', 'Insert Successful!');
         } catch (\Throwable $th) {
             // throw $th;
@@ -30,21 +30,21 @@ class LotController extends Controller
     }
     public function edit($id)
     {
-        $lot = Lot::get();
-        $lotData = Lot::find($id);
-        return view('pages.admin.pricebond.lot', compact('lot', 'lotData'));
+        $client = Client::latest()->get();
+        $clientData = Client::find($id);
+        return view('pages.admin.pricebond.client', compact('client', 'clientData'));
     }
     
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'number' => 'required|max:2|min:2',
+            'name' => 'required|max:100',
         ]);
         try {
-            $lot = Lot::find($id);
-            $lot->lot = $request->lot;
-            $lot->save();
+            $client = Client::find($id);
+            $client->name = $request->name;
+            $client->save();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
             //throw $th;
@@ -53,8 +53,8 @@ class LotController extends Controller
     }
     public function delete($id) {
         try {
-            $lot = Lot::find($id);
-            $lot->forceDelete();
+            $client = Client::find($id);
+            $client->forceDelete();
             return Redirect()->back()->with('success', 'Delete Successful!');
         } catch (\Throwable $th) {
             //throw $th;

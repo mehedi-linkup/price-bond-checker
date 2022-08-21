@@ -18,47 +18,74 @@
                         <form action="{{ (@$winnerData) ? route('price-winner.update', $winnerData->id) : route('price-winner.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-2">
-                                <div class="col-md-6 mb-2">
-                                    {{-- <div class="form-group row">
-                                        <label for="draw_No" class="col-sm-2 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                          <input type="number" class="form-control form-control-sm" id="inputEmail3">
-                                          @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
+                                <div class="col-md-6 my-2">
+                                    <div class="form-group row">
+                                        <label for="draw_id" class="col-sm-3 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <select name="draw_id" class="form-control form-control-sm d-inline-block mb-2" style="width: 88%" id="draw_id">
+                                                @if(@$winnerData)
+                                                @foreach($draw as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == @$winnerData->draw_id ? 'selected' : '' }} >{{ $item->draw }}</option>
+                                                @endforeach
+                                                @elseif(old('draw_id'))
+                                                @foreach($draw as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == old('draw_id') ? 'selected' : '' }}>{{ $item->draw }}</option>
+                                                @endforeach
+                                                @else
+                                                <option value="">Select Serial</option>
+                                                @foreach($draw as $item)
+                                                <option value="{{ $item->id }}">{{ $item->draw }}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <a href="{{ route('draw.all') }}" class="add-item"><i class="fas fa-plus-circle"></i></a>
+                                            @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
                                         </div>
-                                    </div> --}}
-                                    <label for="draw_No"> Draw Number <span class="text-danger">*</span> </label>
-                                    <input type="number" name="draw_No" value="{{ @$winnerData ? $winnerData->draw_No : old('draw_No') }}" class="form-control form-control-sm mb-2" id="draw_No" placeholder="Draw Number">
-                                    @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 my-2">
+                                    <div class="form-group row">
+                                        <label for="price_list_id" class="col-sm-3 col-form-label">Price Serial <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <select name="price_list_id" class="form-control form-control-sm d-inline-block mb-2"  style="width: 88%" id="price_list_id">
+                                                @if(@$winnerData)
+                                                @foreach($pricelist as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_list_id ? 'selected' : '' }} >{{ $item->price_sl }}</option>
+                                                @endforeach
+                                                @elseif(old('price_sl_id'))
+                                                @foreach($pricelist as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == old('price_list_id') ? 'selected' : '' }}>{{ $item->price_sl }}</option>
+                                                @endforeach
+                                                @else
+                                                <option value="">Select Serial</option>
+                                                @foreach($pricelist as $item)
+                                                <option value="{{ $item->id }}">{{ $item->price_sl }}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <a href="{{ route('price-list') }}" class="add-item"><i class="fas fa-plus-circle"></i></a>
+                                            @error('price_list_id') <span style="color: red">{{$message}}</span> @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group row">
+                                        <label for="bond_number" class="col-sm-3 col-form-label">Bond Number<span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="number" name="bond_number" value="{{ @$winnerData ? $winnerData->bond_number : old('bond_number')}}" class="form-control form-control-sm mb-2" id="bond_number" placeholder="Bond Number">
+                                            @error('bond_number') <span style="color: red">{{$message}}</span> @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="price_sl" class="mb-2"> Price Serial <span class="text-danger">*</span> </label>
-                                    <select name="price_sl_id" class="form-control form-control-sm mb-2">
-                                        @if(@$winnerData)
-                                        @foreach($list as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_sl_id ? 'selected' : '' }} >{{ $item->price_sl }}</option>
-                                        @endforeach
-                                        @elseif(old('price_sl_id'))
-                                        @foreach($list as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == old('price_sl_id') ? 'selected' : '' }}>{{ $item->price_sl }}</option>
-                                        @endforeach
-                                        @else
-                                        <option value="">Select Serial</option>
-                                        @foreach($list as $item)
-                                        <option value="{{ $item->id }}">{{ $item->price_sl }}</option>
-                                        @endforeach
-                                        @endif
-                                    </select>
-                                    @error('price_sl_id') <span style="color: red">{{$message}}</span> @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="bond_number"> Bond Number <span class="text-danger">*</span> </label>
-                                    <input type="number" name="bond_number" value="{{ @$winnerData ? $winnerData->bond_number : old('bond_number')}}" class="form-control form-control-sm mb-2" id="bond_number" placeholder="Bond Number">
-                                    @error('bond_number') <span style="color: red">{{$message}}</span> @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="draw_date">Draw Date</label>
-                                    <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : date('Y-m-d') }}" min="2022-01-31" max="2022-10-31">
-                                    @error('draw_date') <span style="color: red">{{$message}}</span> @enderror
+                                    <div class="form-group row">
+                                        <label for="draw_date" class="col-sm-3 col-form-label">Draw Date</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : date('Y-m-d') }}" min="2022-01-31" max="2022-10-31">
+                                        </div>
+                                        @error('draw_date') <span style="color: red">{{$message}}</span> @enderror
+                                    </div>
                                 </div>
                             </div>
                             

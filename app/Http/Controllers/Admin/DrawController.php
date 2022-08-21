@@ -4,24 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Lot;
+use App\Models\Draw;
 
-class LotController extends Controller
+class DrawController extends Controller
 {
     public function index() {
-        $lot = Lot::get();
-        return view('pages.admin.pricebond.lot', compact('lot'));
+        $draw = Draw::latest()->get();
+        return view('pages.admin.pricebond.draw', compact('draw'));
     }
     
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required|unique:lots|numeric|digits_between:1,5',
+            'draw' => 'required|unique:draws|numeric|digits_between:1,5',
         ]);
         try {
-            $lot = new Lot();
-            $lot->number = $request->number;
-            $lot->save();
+            $draw = new Draw();
+            $draw->draw = $request->draw;
+            $draw->save();
             return Redirect()->back()->with('success', 'Insert Successful!');
         } catch (\Throwable $th) {
             // throw $th;
@@ -30,21 +30,21 @@ class LotController extends Controller
     }
     public function edit($id)
     {
-        $lot = Lot::get();
-        $lotData = Lot::find($id);
-        return view('pages.admin.pricebond.lot', compact('lot', 'lotData'));
+        $draw = Draw::latest()->get();
+        $drawData = draw::find($id);
+        return view('pages.admin.pricebond.draw', compact('draw', 'drawData'));
     }
     
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'number' => 'required|max:2|min:2',
+            'draw' => 'required|numeric|digits_between:1,5',
         ]);
         try {
-            $lot = Lot::find($id);
-            $lot->lot = $request->lot;
-            $lot->save();
+            $draw = Draw::find($id);
+            $draw->draw = $request->draw;
+            $draw->save();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
             //throw $th;
@@ -53,8 +53,8 @@ class LotController extends Controller
     }
     public function delete($id) {
         try {
-            $lot = Lot::find($id);
-            $lot->forceDelete();
+            $draw = draw::find($id);
+            $draw->forceDelete();
             return Redirect()->back()->with('success', 'Delete Successful!');
         } catch (\Throwable $th) {
             //throw $th;
