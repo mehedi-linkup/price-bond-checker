@@ -29,7 +29,6 @@ class DashboardController extends Controller
         // $product = count(Product::all());
         // $category = count(Category::all());
         // $subcategory = count(Subcategory::all());
-        $query = count(Query::all());
         return view('pages.admin.home');
     }
 }
