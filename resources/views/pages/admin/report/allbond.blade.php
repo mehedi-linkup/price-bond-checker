@@ -3,15 +3,15 @@
 
 <main>
     <div class="container-fluid">
-        <div class="row justify-content-center">
+        {{-- <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card mt-4">
-                    {{-- <div class="card-body">
+                    <div class="card-body">
                         <p class="m-0 text-success text-center py-2">Search</p>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card my-3">

@@ -9,7 +9,6 @@
                             @csrf
                             <div class="card-header d-flex">
                                 <span class="col-sm-1" style="margin-top: 3px;">Sales</span>
-
                                 <div class="col-sm-3">
                                     <div class="form-group row mb-0">
                                         <label for="lot_id" class="col-sm-4 col-form-label col-form-label-sm">Lot
