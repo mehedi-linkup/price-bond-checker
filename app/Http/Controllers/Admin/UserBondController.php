@@ -55,8 +55,8 @@ class UserBondController extends Controller
         $request->validate([
             'bond_number' => 'required|numeric|digits:7',
             'date' => 'required|date',
-            'lot_number' => 'required',
-            'series_no' => 'required',
+            'lot_id' => 'required',
+            'series_id' => 'required',
             'price' => 'required|numeric|digits_between:2,3'
         ]);
         
@@ -64,10 +64,10 @@ class UserBondController extends Controller
             $userBond = UserBond::find($id);
             $userBond->bond_number = $request->bond_number;
             $userBond->date = $request->date;
-            $userBond->lot_number = $request->lot_number;
-            $userBond->series_no = $request->series_no;
+            $userBond->lot_id = $request->lot_id;
+            $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
-            $userBond->save();
+            $userBond->update();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
             // throw $th;
@@ -86,12 +86,19 @@ class UserBondController extends Controller
         }
     }
 
+    //For Lot List page
+    public function lotlist() {
+        $lot = Lot::latest()->get();
+        return view('pages.admin.pricebond.lot-list', compact('lot'));
+    }
+
+
     public function allbond() {
         $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
         return view('pages.admin.report.allbond', compact('userbond'));
     }
 
-    public function bondinLots($id) {
+    public function bondWithLot($id) {
         $lot = Lot::with('userbond')->find($id);
         return view('pages.admin.pricebond.user-lot-bond', compact('lot'));
     }

@@ -2,6 +2,10 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Dashboard
+                </a>
                 <a class="nav-link" href="{{ route('price-winner') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-trophy"></i></div>
                     Winner List
@@ -9,6 +13,10 @@
                 <a class="nav-link" href="{{ route('userbond') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                     Purchase Bonds
+                </a>
+                <a class="nav-link" href="{{ route('lot.list') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                    Purchased Lot
                 </a>
                 <a class="nav-link" href="{{ route('sales') }}">
                     <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>

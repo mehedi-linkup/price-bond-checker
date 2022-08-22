@@ -16,7 +16,7 @@
                                     <select class="form-control form-control-sm col-sm-6" id="search_by" onchange="SearchBy(this.value)">
                                         <option value="" selected>Select---</option>
                                         <option value="lot">Lot</option>
-                                        <option value="draw_no">Draw No</option>
+                                        {{-- <option value="draw_no">Draw No</option> --}}
                                         {{-- <option value="win_series">Win Series</option>
                                         <option value="draw_date">Draw Date</option>
                                         <option value="win_amount">Win Amount</option>
@@ -51,10 +51,9 @@
                                 <div class="form-group row py-2 mb-0">
                                     <label for="draw_id" class="col-sm-6 col-form-label col-form-label-sm">Draw No</label>
                                     <select name="draw_id" class="form-control form-control-sm col-sm-6" id="draw_id">
-                                        <option value="">All</option>
-                                        <option value="107">107</option>
-                                        <option value="108">108</option>
-                                        <option value="109">109</option>
+                                        @foreach ($draw as $item)
+                                        <option value="{{ $item->id }}">{{ $item->draw }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -118,7 +117,6 @@
                                 <thead>
                                     <tr>
                                         <th>Sl No</th>
-                                        <th>Win No</th>
                                         <th>Draw No</th>
                                         <th>Draw Date</th>
                                         <th>Win Position</th>
@@ -135,11 +133,11 @@
                                         $pricelist = \App\Models\PriceList::find($item->price_list_id);
                                         $banglaSeries = \App\Models\BondSeries::find($item->series_id);
                                         $lotno = \App\Models\Lot::find($item->lot_id);
+                                        $drawno =  \App\Models\Draw::find($item->draw_id);
                                     @endphp
                                     <tr class="text-success">
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $item->bond_number }}</td>
-                                        <td>{{ $item->draw_No }}</td>
+                                        <td>{{ $drawno->draw }}</td>
                                         <td>{{ date('F j, Y',strtotime($item->draw_date)) }}</td>
                                         <td class="th_parent">{{ @$pricelist ? $pricelist->price_sl : 'Unknown' }}</td>
                                         <td>{{ @$pricelist ? $pricelist->amount : 'Unknown'}}</td>

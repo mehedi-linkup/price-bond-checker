@@ -7,66 +7,54 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            {{-- <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #484d52">
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white mb-4" style="background: #1487e6">
                     <div class="card-body">
-                        <div>Customer Message</div>
-                        <span></span>
+                        <div>Purchased Bond</div>
+                        <span>{{$userbond}}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">View Details</a>
+                        <a class="small text-white stretched-link" href="{{ route('userbond') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #484d52">
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white mb-4" style="background: #f025c4">
                     <div class="card-body">
-                        <div>Service Query Message</div>
-                        <span></span>
+                        <div>Sold Bond</div>
+                        <span>{{ $soldbond }}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">View Details</a>
+                        <a class="small text-white stretched-link" href="#!">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #484d52">
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white mb-4" style="background: #9b0e20">
                     <div class="card-body">
-                        <div>Product Category</div>
-                       
+                        <div>Total Winner</div>
+                        <span>{{$pricewinner}}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">View Details</a>
+                        <a class="small text-white stretched-link" href="{{ route('price-winner') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #484d52">
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card text-white mb-4" style="background: #0e9b59">
                     <div class="card-body">
-                        <div>Product Sub Category</div>
-                        <span></span>
+                        <div>Total Lot</div>
+                        <span>{{$lot}}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="">View Details</a>
+                        <a class="small text-white stretched-link" href="{{ route('lot.list') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #484d52">
-                    <div class="card-body">
-                        <div>Total Product</div>
-                        <span></span>
-                    </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href=>View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </main>

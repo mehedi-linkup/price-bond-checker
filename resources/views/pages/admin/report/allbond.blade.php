@@ -36,7 +36,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($userbond as $item)
-                                    <tr class="text-success">
+                                    <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->lot->number }}</td>
                                         <td>{{ $item->bondseries->series }}</td>

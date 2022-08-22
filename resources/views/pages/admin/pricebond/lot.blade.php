@@ -18,9 +18,13 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="Number" class="mb-2"> Lot Number <span class="text-danger">*</span> </label>
-                                    <input type="number" name="number" value="{{ @$lotData ? $lotData->number : old('number')}}" class="form-control form-control-sm mb-2" id="Number" placeholder="Lot Number">
-                                    @error('number') <span style="color: red">{{$message}}</span><br> @enderror
+                                    <div class="form-group row">
+                                        <label for="Number" class="col-sm-3 col-form-label mt-2"> Lot Number <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9 mt-2">
+                                            <input type="number" name="number" value="{{ @$lotData ? $lotData->number : old('number')}}" class="form-control form-control-sm mb-2" id="Number" placeholder="Lot Number">
+                                        </div>
+                                        @error('number') <span style="color: red">{{$message}}</span><br> @enderror
+                                    </div>       
                                 </div>
                             </div>
                             
@@ -31,7 +35,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$lotData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$lotData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

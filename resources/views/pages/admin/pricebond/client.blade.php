@@ -35,7 +35,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$clientData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$clientData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

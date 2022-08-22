@@ -18,13 +18,21 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="price_sl" class="mb-2"> Prize Serial <span class="text-danger">*</span> </label>
-                                    <input type="number" name="price_sl" value="{{ @$priceData ? $priceData->price_sl : old('price_sl')}}" class="form-control form-control-sm mb-2" id="price_sl" placeholder="Price Serial">
-                                    @error('price_sl') <span style="color: red">{{$message}}</span><br> @enderror
+                                    <div class="form-group row">
+                                        <label for="price_sl" class="col-sm-3 col-form-label mt-2"> Prize Serial <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9 mt-2">
+                                            <input type="number" name="price_sl" value="{{ @$priceData ? $priceData->price_sl : old('price_sl')}}" class="form-control form-control-sm mb-2" id="price_sl" placeholder="Price Serial">
+                                        </div>
+                                        @error('price_sl') <span style="color: red">{{$message}}</span><br> @enderror
+                                    </div>       
 
-                                    <label for="amount"> Prize Amount <span class="text-danger">*</span> </label>
-                                    <input type="number" name="amount" value="{{ @$priceData ? $priceData->amount : old('amount')}}" class="form-control form-control-sm mb-2" id="amount" placeholder="Price Amount">
-                                    @error('amount') <span style="color: red">{{$message}}</span><br> @enderror
+                                    <div class="form-group row">
+                                        <label for="amount" class="col-sm-3 col-form-label mt-2"> Prize amount <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9 mt-2">
+                                            <input type="number" name="amount" value="{{ @$priceData ? $priceData->amount : old('amount')}}" class="form-control form-control-sm mb-2" id="amount" placeholder="Price amount">
+                                        </div>
+                                        @error('amount') <span style="color: red">{{$message}}</span><br> @enderror
+                                    </div> 
                                 </div>
                             </div>
                             
@@ -35,7 +43,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$priceData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$priceData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

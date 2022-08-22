@@ -8,7 +8,6 @@
                     <div class="card-header">
                         @if(@isset($drawData))
                         <i class="fas fa-edit mr-1"></i>Update Draw Number
-                        
                         @else
                         <i class="fas fa-plus mr-1"></i>Add Draw Number
                         @endif
@@ -24,9 +23,7 @@
                                             <input type="number" name="draw" value="{{ @$drawData ? $drawData->draw : old('draw')}}" class="form-control form-control-sm mb-2" id="draw" placeholder="Draw Number">
                                         </div>
                                         @error('draw') <span style="color: red">{{$message}}</span><br> @enderror
-                                    </div>
-
-                                    
+                                    </div>                                    
                                 </div>
                             </div>
                             
@@ -37,7 +34,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$drawData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$drawData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

@@ -18,9 +18,18 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="series" class="mb-2"> Bond Series <span class="text-danger">*</span> </label>
+                                    {{-- <label for="series" class="mb-2"> Bond Series <span class="text-danger">*</span> </label>
                                     <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
-                                    @error('series') <span style="color: red">{{$message}}</span><br> @enderror
+                                    @error('series') <span style="color: red">{{$message}}</span><br> @enderror --}}
+
+
+                                    <div class="form-group row">
+                                        <label for="series" class="col-sm-3 col-form-label mt-2"> Bond Series <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9 mt-2">
+                                            <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
+                                        </div>
+                                        @error('series') <span style="color: red">{{$message}}</span><br> @enderror
+                                    </div>       
                                 </div>
                             </div>
                             
@@ -31,7 +40,7 @@
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$bondData)?'Update':'Create'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$bondData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>

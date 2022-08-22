@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Message;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Subcategory;
-use App\Models\Query;
-
-
+use App\Models\Lot;
+use App\Models\PriceWinner;
+use App\Models\UserBond;
 
 class DashboardController extends Controller
 {
@@ -18,17 +14,12 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    // index
     public function index()
     {
-        // $users = DB::table('users')->get();
-        // $message = Message::latest()->get();
-        // $slider = Slider::latest()->get();
-        // $service = Service::latest()->get();
-        // return view('pages.admin.home', compact('users', 'message', 'slider', 'service'));
-        // $product = count(Product::all());
-        // $category = count(Category::all());
-        // $subcategory = count(Subcategory::all());
-        return view('pages.admin.home');
+        $userbond = UserBond::count();
+        $soldbond = UserBond::where('status', 's')->count();
+        $pricewinner = PriceWinner::count();
+        $lot = Lot::count();
+        return view('pages.admin.home', compact('userbond', 'soldbond', 'pricewinner', 'lot'));
     }
 }
