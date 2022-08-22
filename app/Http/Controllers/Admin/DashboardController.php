@@ -26,11 +26,10 @@ class DashboardController extends Controller
         // $slider = Slider::latest()->get();
         // $service = Service::latest()->get();
         // return view('pages.admin.home', compact('users', 'message', 'slider', 'service'));
-        $message = count(Message::all());
-        $product = count(Product::all());
-        $category = count(Category::all());
-        $subcategory = count(Subcategory::all());
+        // $product = count(Product::all());
+        // $category = count(Category::all());
+        // $subcategory = count(Subcategory::all());
         $query = count(Query::all());
-        return view('pages.admin.home', compact('message', 'category', 'product','query', 'subcategory'));
+        return view('pages.admin.home');
     }
 }

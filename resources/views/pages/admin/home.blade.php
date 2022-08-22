@@ -11,10 +11,10 @@
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Customer Message</div>
-                        <span>{{ $message }}</span>
+                        <span></span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('admin.message') }}">View Details</a>
+                        <a class="small text-white stretched-link" href="">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -23,10 +23,10 @@
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Service Query Message</div>
-                        <span>{{ $query }}</span>
+                        <span></span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('admin.query') }}">View Details</a>
+                        <a class="small text-white stretched-link" href="">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -35,10 +35,10 @@
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Product Category</div>
-                        <span>{{ $category }}</span>
+                       
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('admin.categories') }}">View Details</a>
+                        <a class="small text-white stretched-link" href="">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -47,10 +47,10 @@
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Product Sub Category</div>
-                        <span>{{ $subcategory }}</span>
+                        <span></span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('admin.subcategories') }}">View Details</a>
+                        <a class="small text-white stretched-link" href="">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -59,10 +59,10 @@
                 <div class="card text-white mb-4" style="background: #484d52">
                     <div class="card-body">
                         <div>Total Product</div>
-                        <span>{{ $product }}</span>
+                        <span></span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('admin.products') }}">View Details</a>
+                        <a class="small text-white stretched-link" href=>View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
