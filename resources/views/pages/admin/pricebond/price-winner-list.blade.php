@@ -39,20 +39,20 @@
                                                 @endif
                                             </select>
                                             <a href="{{ route('draw.all') }}" class="add-item"><i class="fas fa-plus-circle"></i></a>
-                                            @error('draw_No') <span style="color: red">{{$message}}</span> @enderror
+                                            @error('draw_id') <span style="color: red">{{$message}}</span> @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 my-2">
                                     <div class="form-group row">
-                                        <label for="price_list_id" class="col-sm-3 col-form-label">Price Serial <span class="text-danger">*</span></label>
+                                        <label for="price_list_id" class="col-sm-3 col-form-label">Prize Serial <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <select name="price_list_id" class="form-control form-control-sm d-inline-block mb-2"  style="width: 88%" id="price_list_id">
                                                 @if(@$winnerData)
                                                 @foreach($pricelist as $item)
                                                 <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_list_id ? 'selected' : '' }} >{{ $item->price_sl }}</option>
                                                 @endforeach
-                                                @elseif(old('price_sl_id'))
+                                                @elseif(old('price_list_id'))
                                                 @foreach($pricelist as $item)
                                                 <option value="{{ $item->id }}" {{ $item->id == old('price_list_id') ? 'selected' : '' }}>{{ $item->price_sl }}</option>
                                                 @endforeach
@@ -116,29 +116,22 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>ID</th> --}}
-                                        <th>Price Serial</th>
-                                        <th>Draw No</th>
+                                        <th>Prize Serial</th>
                                         <th>Bond Number</th>
+                                        <th>Prize Amount</th>
+                                        <th>Draw No</th>
                                         <th>Draw Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($winner as $item)
-                                    <tr>
+                                    <tr style="color: #008000">
                                         {{-- <td>{{ $loop->index + 1 }}</td> --}}
-                                        <td class="th_parent">
-                                            @php
-                                                $pricesl = \App\Models\PriceList::where('id', $item->price_sl_id)->first();
-                                            @endphp
-                                            @if($pricesl)
-                                            {{ $pricesl->price_sl }}<i><span class="th"></span></i>
-                                            @else
-                                            {{ 'Unknown' }}
-                                            @endif
-                                        </td>
-                                        <td>{{ $item->draw_No }}</td>
+                                        <td>{{ $item->pricelist->price_sl }} </td>
                                         <td>{{ $item->bond_number }}</td>
+                                        <td>{{ $item->pricelist->amount }} </td>
+                                        <td>{{ $item->draw->draw }}</td>
                                         <td>{{ $item->draw_date }}</td>
                                         <td>
                                             <a href="{{ route('price-winner.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>

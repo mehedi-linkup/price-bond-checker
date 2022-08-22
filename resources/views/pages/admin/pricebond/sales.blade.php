@@ -24,11 +24,19 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group row mb-0">
-                                        <label for="client_name" class="col-sm-4 col-form-label col-form-label-sm">Client
+                                        <label for="client_id" class="col-sm-4 col-form-label col-form-label-sm">Client
                                             Name</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="name" class="form-control form-control-sm"
-                                                id="client_name" placeholder="Insert Client Name">
+                                            {{-- <input type="text" name="name" class="form-control form-control-sm"
+                                                id="client_name" placeholder="Insert Client Name"> --}}
+
+                                            <select name="client_id" class="form-control form-control-sm col-sm-8" id="client_id">
+                                                <option value=""selected>Select Client</option>
+                                                @foreach ($client as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('client_id')<span style="color:red; font-size:11px">{{$message}}</span>@enderror
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +59,7 @@
                                                 <th>Status</th>
                                                 <th>Purchase Date</th>
                                                 {{-- <th>Sold Date</th> --}}
-                                                <th>Action</th>
+                                                {{-- <th>Action</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,7 +68,7 @@
                                                     <td><input type="checkbox" name="value[]"
                                                             id="checkbox{{ $item->id }}" value="{{ $item->id }}">
                                                     </td>
-                                                    <td>{{ 1 }}</td>
+                                                    <td>{{ $loop->index + 1 }}</td>
                                                     <td>
                                                         @php
                                                             $lotitem = \App\Models\lot::find($item->lot_id);
@@ -87,7 +95,7 @@
                                                     </td>
                                                     <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>
                                                     {{-- <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td> --}}
-                                                    <td>
+                                                    {{-- <td>
                                                         <a href="{{ route('userbond.edit', $item->id) }}"
                                                             class="btn btn-info btn-mod-info btn-sm"><i
                                                                 class="fas fa-edit"></i></a>
@@ -95,7 +103,7 @@
                                                             onclick="return confirm('Are you sure to Delete?')"
                                                             class="btn btn-danger btn-mod-danger btn-sm"><i
                                                                 class="fas fa-trash"></i></a>
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -138,7 +146,6 @@
                 data: '',
                 success: function(res) {
                     // console.log(res);
-                    console.log(res);
                     $('#replaceBondList').html(res);
                     $('#dataTable').DataTable();
                     $("#all").on("change", function(event) {
@@ -148,23 +155,22 @@
                             $("[type=checkbox]").attr("checked", false)
                         }
                     });
-                    $('#replaceBondList').replaceWith( res )
 
-                    // $("tbody").html("");
-                    // $.each(res, function(val){
-                    //     var row = `
-                    //         <tr></tr>
-                    //     `;
-
-                    //     $('tbody').append(row);
-
-                    // })
+                    // $('#replaceBondList').replaceWith(res)
                     
                 }
             });
         });
+        
+        // $("tbody").html("");
+        // $.each(res, function(val){
+        //     var row = `
+        //         <tr></tr>
+        //     `;
+        //     $('tbody').append(row);
 
-        // function getCheckboxValue() {
+        // })
+// function getCheckboxValue() {
         //     // var value = $("input[type='checkbox']"). val();
         //     var value = $('#checkbox1').val();
         //     console.log(value)

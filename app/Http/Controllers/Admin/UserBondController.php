@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BondSeries;
+use App\Models\Client;
 use App\Models\Lot;
 use Illuminate\Http\Request;
 use App\Models\UserBond;
@@ -85,6 +86,11 @@ class UserBondController extends Controller
         }
     }
 
+    public function allbond() {
+        $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
+        return view('pages.admin.report.allbond', compact('userbond'));
+    }
+
     public function bondinLots($id) {
         $lot = Lot::with('userbond')->find($id);
         return view('pages.admin.pricebond.user-lot-bond', compact('lot'));
@@ -93,36 +99,48 @@ class UserBondController extends Controller
     public function sales() {
         $series = BondSeries::all();
         $lot = Lot::all();
-        $bondlist = UserBond::latest()->get();
-        return view('pages.admin.pricebond.sales', compact('bondlist', 'series', 'lot'));
+        $bondlist = UserBond::where('status', 'p')->latest()->get();
+        $client = Client::latest()->get();
+        return view('pages.admin.pricebond.sales', compact('bondlist', 'series', 'lot', 'client'));
     }
     public function salesWithLot($id = null) {
         if($id == null) {
-            $lot = Lot::with('userbond')->latest()->get();
-            $data = ['data' => $lot];
+            // $lot = Lot::with('userbond')->latest()->get();
+            $bondlist = UserBond::where('status', 'p')->latest()->get();
+            // $data = ['data' => $bondlist];
             // return response()->json($data);
-            return view('pages.admin.loadpage.saleswithlot', compact('lot'));
+            return view('pages.admin.loadpage.saleswithlot', compact('bondlist'));
+        } else {
+            // $id = [$id];
+            // $lot = Lot::with('userbond')->find($id);
+            // $data = ['data' => $lot];
+            // return response()->json($data);
+            // return response()->json($lot[0]->userbond);
+            $bondlist = UserBond::where('status', 'p')->where('lot_id', $id)->get();
+            return view('pages.admin.loadpage.saleswithlot', compact('bondlist'));
         }
-        $id = [$id];
-        $lot = Lot::with('userbond')->find($id);
-        // $data = ['data' => $lot];
-        // return response()->json($lot[0]->userbond);
-        return view('pages.admin.loadpage.saleswithlot', compact('lot'));
     }
     public function status(Request $request) {
-        return $request;
+        $request->validate([
+            'client_id'=> 'required',
+
+        ]);
         $value = $request->value;
+        if(empty($value)) {
+            return Redirect()->back()->with('error', 'You have not selected any bonds!');
+        }
         try {
             foreach ($value as $key => $item) {
-                 $userBond = UserBond::find($item);
-                 $userBond->status = 's';
-                 $userBond->update();
+                 $userbond = UserBond::find($item);
+                 $userbond->client_id = $request->client_id;
+                 $userbond->status = 's';
+                 $userbond->update();
             }
-            return Redirect()->back()->with('success', 'Status Changed!');
+            return Redirect()->back()->with('success', 'Selected Bonds Sold!');
         } catch (\Throwable $th) {
             // throw $th;
             // return $th->getMessage();
-            return Redirect()->back()->with('error', 'Status Unchanged!');
+            return Redirect()->back()->with('error', 'Selected Bonds Unsold!');
         }
     }
 }

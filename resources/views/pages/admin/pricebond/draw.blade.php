@@ -33,7 +33,7 @@
                             <div class="clearfix border-top">
                                 <div class="float-md-right mt-2">
                                     @if(@$drawData) 
-                                    <a href="{{ route('draw') }}" class="btn btn-dark btn-sm">Back</a>
+                                    <a href="{{ route('draw.all') }}" class="btn btn-dark btn-sm">Back</a>
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif

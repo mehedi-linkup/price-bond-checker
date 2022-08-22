@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PriceWinner extends Model
 {
     use HasFactory, SoftDeletes;
-    public function priceList()
+    public function pricelist()
     {
-        return $this->belongsTo(PriceList::class);
+        return $this->belongsTo(PriceList::class, 'price_list_id', 'id');
+    }
+    public function draw() {
+        return $this->belongsTo(Draw::class, 'draw_id', 'id');
     }
 
 }

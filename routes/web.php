@@ -19,10 +19,12 @@ use App\Http\Controllers\admin\PriceBondController;
 use App\Http\Controllers\admin\PriceListController;
 use App\Http\Controllers\Admin\BondSeriesController;
 use App\Http\Controllers\Admin\ManagementController;
+use App\Http\Controllers\Admin\PrizeWinnerController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\AuthenticationController;
 use App\Http\Controllers\Admin\CompanyProfileController;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,9 @@ use App\Http\Controllers\Admin\CompanyProfileController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function() {
+    return Redirect()->route('dashboard');
+});
 Route::get('/submenu/{id}', [HomeController::class, 'submenu'])->name('submenu');
 Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 Route::get('/product-detail/{id}', [HomeController::class, 'productDetail'])->name('productDetail');
@@ -143,11 +147,11 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::post('/lot/update/{id}', [LotController::class, 'update'])->name('lot.update');
     Route::get('/lot/delete/{id}', [LotController::class, 'delete'])->name('lot.delete');
 
-    Route::get('/price-winner-list', [PriceBondController::class, 'priceWinner'])->name('price-winner');
-    Route::post('/price-winner-list/store', [PriceBondController::class, 'store'])->name('price-winner.store');
-    Route::get('/price-winner-list/edit/{id}', [PriceBondController::class, 'edit'])->name('price-winner.edit');
-    Route::post('/price-winner-list/update/{id}', [PriceBondController::class, 'update'])->name('price-winner.update');
-    Route::get('/price-winner-list/delete/{id}', [PriceBondController::class, 'delete'])->name('price-winner.delete');
+    Route::get('/price-winner-list', [PrizeWinnerController::class, 'index'])->name('price-winner');
+    Route::post('/price-winner-list/store', [PrizeWinnerController::class, 'store'])->name('price-winner.store');
+    Route::get('/price-winner-list/edit/{id}', [PrizeWinnerController::class, 'edit'])->name('price-winner.edit');
+    Route::post('/price-winner-list/update/{id}', [PrizeWinnerController::class, 'update'])->name('price-winner.update');
+    Route::get('/price-winner-list/delete/{id}', [PrizeWinnerController::class, 'delete'])->name('price-winner.delete');
 
     Route::get('/userbond', [UserBondController::class, 'index'])->name('userbond');
     Route::post('/userbond/store', [UserBondController::class, 'store'])->name('userbond.store');
@@ -167,10 +171,12 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::get('/sales', [UserBondController::class, 'sales'])->name('sales');
     Route::get('/saleswithlot/{id?}', [UserBondController::class, 'salesWithLot'])->name('saleswithlot');
 
+    Route::post('/status-change', [UserBondController::class, 'status'])->name('status');
 
-    Route::get('/report', [joinController::class, 'report'])->name('report');
-    Route::get('/report-result', [joinController::class, 'reportResult'])->name('report.result');
+   
+    // Route in Report
+    Route::get('/report/all', [UserBondController::class, 'allbond'])->name('report.all');
+    Route::get('/report-draw', [joinController::class, 'reportDraw'])->name('report.draw');
     Route::post('/report-load', [joinController::class, 'reportLoad'])->name('report.load');
 
-    Route::post('/status-change', [UserBondController::class, 'status'])->name('status');
 });

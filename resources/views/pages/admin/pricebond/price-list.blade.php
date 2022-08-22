@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'price-list', 'title' => 'Add list List'])
+@extends('layouts.admin-master', ['pageName'=> 'prize-list', 'title' => 'Add Prize List'])
 @section('admin-content')
 
 <main>
@@ -8,9 +8,9 @@
                 <div class="card my-3">
                     <div class="card-header">
                         @if(@isset($priceData))
-                        <i class="fas fa-edit mr-1"></i>Update Price List
+                        <i class="fas fa-edit mr-1"></i>Update Prize List
                         @else
-                        <i class="fas fa-plus mr-1"></i>Add Price List
+                        <i class="fas fa-plus mr-1"></i>Add Prize List
                         @endif
                     </div>
                     <div class="card-body">
@@ -18,11 +18,11 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="price_sl" class="mb-2"> Price Serial <span class="text-danger">*</span> </label>
+                                    <label for="price_sl" class="mb-2"> Prize Serial <span class="text-danger">*</span> </label>
                                     <input type="number" name="price_sl" value="{{ @$priceData ? $priceData->price_sl : old('price_sl')}}" class="form-control form-control-sm mb-2" id="price_sl" placeholder="Price Serial">
                                     @error('price_sl') <span style="color: red">{{$message}}</span><br> @enderror
 
-                                    <label for="amount"> Price Amount <span class="text-danger">*</span> </label>
+                                    <label for="amount"> Prize Amount <span class="text-danger">*</span> </label>
                                     <input type="number" name="amount" value="{{ @$priceData ? $priceData->amount : old('amount')}}" class="form-control form-control-sm mb-2" id="amount" placeholder="Price Amount">
                                     @error('amount') <span style="color: red">{{$message}}</span><br> @enderror
                                 </div>
@@ -30,7 +30,11 @@
                             
                             <div class="clearfix border-top">
                                 <div class="float-md-right mt-2">
+                                    @if(@$priceData)
+                                    <a href="{{ route('price-list') }}" class="btn btn-dark btn-sm">Back</a>
+                                    @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
+                                    @endif
                                     <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$priceData)?'Update':'Create'}}</button>
                                 </div>
                             </div>
@@ -50,8 +54,8 @@
                             <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Price Serial</th>
-                                        <th>Price Amount</th>
+                                        <th>Prize Serial</th>
+                                        <th>Prize Amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

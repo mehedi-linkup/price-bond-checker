@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'report-result', 'title' => 'All Result'])
+@extends('layouts.admin-master', ['pageName'=> 'report-draw', 'title' => 'All Result'])
 @section('admin-content')
 
 <main>
@@ -27,8 +27,8 @@
                             </div>
                             <div class="col-lg-2" id="lot_no_column" style="display: none">
                                 <div class="form-group row py-2 mb-0">
-                                    <label for="lot_no" class="col-sm-4 col-form-label col-form-label-sm">Lot</label>
-                                    <select name="lot_number" class="form-control form-control-sm col-sm-8" id="lot_no">
+                                    <label for="lot_id" class="col-sm-4 col-form-label col-form-label-sm">Lot</label>
+                                    <select name="lot_id" class="form-control form-control-sm col-sm-8" id="lot_id">
                                         <option value="">All</option>
                                         @foreach ($lot as $item)
                                         <option value="{{ $item->id }}">{{ $item->number }}</option>
@@ -49,8 +49,8 @@
                             </div>
                             <div class="col-lg-2" id="draw_no_column" style="display: none">
                                 <div class="form-group row py-2 mb-0">
-                                    <label for="draw_no" class="col-sm-6 col-form-label col-form-label-sm">Draw No</label>
-                                    <select name="draw_No" class="form-control form-control-sm col-sm-6" id="draw_no">
+                                    <label for="draw_id" class="col-sm-6 col-form-label col-form-label-sm">Draw No</label>
+                                    <select name="draw_id" class="form-control form-control-sm col-sm-6" id="draw_id">
                                         <option value="">All</option>
                                         <option value="107">107</option>
                                         <option value="108">108</option>
@@ -132,9 +132,9 @@
                                 <tbody>
                                     @foreach ($data as $item)
                                     @php
-                                        $pricelist = \App\Models\PriceList::find($item->price_sl_id);
-                                        $banglaSeries = \App\Models\BondSeries::find($item->series_no);
-                                        $lotno = \App\Models\Lot::find($item->lot_number);
+                                        $pricelist = \App\Models\PriceList::find($item->price_list_id);
+                                        $banglaSeries = \App\Models\BondSeries::find($item->series_id);
+                                        $lotno = \App\Models\Lot::find($item->lot_id);
                                     @endphp
                                     <tr class="text-success">
                                         <td>{{ $loop->index + 1 }}</td>

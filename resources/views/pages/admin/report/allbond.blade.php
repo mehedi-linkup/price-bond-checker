@@ -6,9 +6,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card mt-4">
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <p class="m-0 text-success text-center py-2">Search</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
-                       Match Bond List
+                       All Bond List
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -35,7 +35,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $item)
+                                    @foreach ($userbond as $item)
                                     <tr class="text-success">
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $item->lot->number }}</td>
