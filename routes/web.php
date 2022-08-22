@@ -15,7 +15,6 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserBondController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\admin\PriceBondController;
 use App\Http\Controllers\admin\PriceListController;
 use App\Http\Controllers\Admin\BondSeriesController;
 use App\Http\Controllers\Admin\ManagementController;
@@ -23,7 +22,6 @@ use App\Http\Controllers\Admin\PrizeWinnerController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\AuthenticationController;
-use App\Http\Controllers\Admin\CompanyProfileController;
 use Illuminate\Support\Facades\Redirect;
 
 /*
@@ -55,10 +53,6 @@ Route::group(['middleware' => ['auth']] , function(){
     // logout
     Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout');
     Route::put('/admin', [AuthenticationController::class, 'passwordUpdate'])->name('password.change');
-    // company profile 
-    Route::get('company-profile', [CompanyProfileController::class, 'edit'])->name('company.edit');
-    Route::put('company-profile/{company}', [CompanyProfileController::class, 'update'])->name('company.update');
-
     // Create user
     Route::get('/registration', [RegistrationController::class, 'index'])->name('register.create');
     Route::post('/registration', [RegistrationController::class, 'store'])->name('register.store');
