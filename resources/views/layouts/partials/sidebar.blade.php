@@ -19,8 +19,12 @@
                     Purchased Lot
                 </a>
                 <a class="nav-link" href="{{ route('sales') }}">
-                    <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-donate"></i></div>
                     Sell Bonds
+                </a>
+                <a class="nav-link" href="{{ route('sold') }}">
+                    <div class="sb-nav-link-icon"><i class="fab fa-sellcast"></i></div>
+                    Sold Bonds
                 </a>
                 {{-- <a class="nav-link" href="{{ route('draw') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-award"></i></div>

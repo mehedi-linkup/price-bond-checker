@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\BondSeries;
-use App\Models\Client;
-use App\Models\Lot;
-use Illuminate\Http\Request;
-use App\Models\UserBond;
 use Carbon\Carbon;
+use App\Models\Lot;
+use App\Models\Draw;
+use App\Models\Client;
+use App\Models\UserBond;
+use App\Models\BondSeries;
+use App\Models\PriceWinner;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
 class UserBondController extends Controller
 {
     public function index() {
-        $series = BondSeries::all();
-        $lot = Lot::all();
+        $series = BondSeries::latest()->get();
+        $lot = Lot::latest()->get();
         $lotwithBond = Lot::with('userbond')->get();
         $bondlist = UserBond::latest()->get();
         return view('pages.admin.pricebond.user-bond', compact('bondlist', 'series', 'lot', 'lotwithBond'));
@@ -94,8 +96,37 @@ class UserBondController extends Controller
 
 
     public function allbond() {
+        $lot = Lot::latest()->get();
+        $draw = Draw::latest()->get();
         $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
-        return view('pages.admin.report.allbond', compact('userbond'));
+        return view('pages.admin.report.allbond', compact('userbond', 'lot', 'draw'));
+    }
+
+    // Ajax request
+    public function reportWithfilter(Request $request) {
+        $lot = Lot::latest()->get();
+        $draw = Draw::latest()->get();
+        // $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
+        $query = [];
+        if(isset($request->lot_id) && $request->lot_id != null) {
+            $query += ['lot' => $request->lot_id];
+        }
+        if(isset($request->status) && $request->status != null)  {
+            $query += ['status' => $request->status];
+        }
+
+        @$lot_id =$query['lot'];
+        @$status = $query['status'];
+        $userbond = UserBond::with('lot', 'bondseries')
+            ->when($lot_id, function ($query, $lot_id) {
+                return $query->where('lot_id', $lot_id);
+            })
+            ->when($status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
+            ->get();  
+            
+        return view('pages.admin.loadpage.allbondfilter', compact('lot', 'draw', 'userbond'));
     }
 
     public function bondWithLot($id) {
@@ -109,6 +140,13 @@ class UserBondController extends Controller
         $bondlist = UserBond::where('status', 'p')->latest()->get();
         $client = Client::latest()->get();
         return view('pages.admin.pricebond.sales', compact('bondlist', 'series', 'lot', 'client'));
+    }
+    public function sold() {
+        $series = BondSeries::all();
+        $lot = Lot::all();
+        $bondlist = UserBond::with('client')->where('status', 's')->latest()->get();
+        $client = Client::latest()->get();
+        return view('pages.admin.pricebond.sold', compact('bondlist', 'series', 'lot', 'client'));
     }
     public function salesWithLot($id = null) {
         if($id == null) {

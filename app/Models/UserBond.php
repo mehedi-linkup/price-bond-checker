@@ -17,4 +17,7 @@ class UserBond extends Model
     {
         return $this->belongsTo(BondSeries::class, 'series_id', 'id');
     }
+    public function client() {
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
 }

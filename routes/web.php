@@ -100,13 +100,17 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::get('/sales', [UserBondController::class, 'sales'])->name('sales');
     // Ajax request route
     Route::get('/saleswithlot/{id?}', [UserBondController::class, 'salesWithLot'])->name('saleswithlot');
-
     Route::post('/status-change', [UserBondController::class, 'status'])->name('status');
 
-   
+    Route::get('/sold', [UserBondController::class, 'sold'])->name('sold');
+
     // Route in Report
     Route::get('/report/all', [UserBondController::class, 'allbond'])->name('report.all');
     Route::get('/report-draw', [joinController::class, 'reportDraw'])->name('report.draw');
     Route::post('/report-load', [joinController::class, 'reportLoad'])->name('report.load');
+
+    // Ajax request route
+    Route::post('/reportWithfilter', [UserBondController::class, 'reportWithfilter'])->name('reportWithfilter');
+
 
 });

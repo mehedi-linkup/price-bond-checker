@@ -40,6 +40,7 @@
                                         <div class="form-group row py-2 mb-0">
                                             <label for="draw_id" class="col-sm-6 col-form-label col-form-label-sm">Draw No</label>
                                             <select name="draw_id" class="form-control form-control-sm col-sm-6" id="draw_id">
+                                                <option value="">All</option>
                                                 @foreach ($draw as $item)
                                                 <option value="{{ $item->id }}">{{ $item->draw }}</option>
                                                 @endforeach

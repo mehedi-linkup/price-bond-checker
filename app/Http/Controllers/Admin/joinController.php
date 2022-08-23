@@ -31,20 +31,49 @@ class joinController extends Controller
 
         $lot = Lot::latest()->get();
         $draw = Draw::latest()->get();
-        if(empty($request->lot_id) && empty($request->draw_id) && empty($request->status)) {
-            $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number");
-        }
-        if(isset($request->lot_id) && $request->lot_id != null) {
-            $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('lot_id', $request->lot_id);
+
+        // if(empty($request->lot_id) && empty($request->draw_id) && empty($request->status)) {
+        //     $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number");
+        // }
+        // if(isset($request->lot_id) && $request->lot_id != null) {
+        //     $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('lot_id', $request->lot_id);
            
+        // }
+        // if(isset($request->draw_id) && $request->draw_id != null) {
+        //     $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('draw_id', $request->draw_id);
+        // }
+        // if(isset($request->status) && $request->status != null)  {
+        //     $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('status', $request->status);
+        // }
+        // $data = $data->get();
+        // return view('pages.admin.report.result', compact('data', 'lot', 'draw'));
+        
+        $query = [];
+        if(isset($request->lot_id) && $request->lot_id != null) {
+            $query += ['lot' => $request->lot_id];
         }
         if(isset($request->draw_id) && $request->draw_id != null) {
-            $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('draw_id', $request->draw_id);
+            $query += ['draw' => $request->draw_id];
         }
         if(isset($request->status) && $request->status != null)  {
-            $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->where('status', $request->status);
+            $query += ['status' => $request->status];
         }
-        $data = $data->get();
+
+        @$lot_id =$query['lot'];
+        @$draw_id =$query['draw'];
+        @$status = $query['status'];
+        $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")
+            ->when($lot_id, function ($query, $lot_id) {
+                return $query->where('lot_id', $lot_id);
+            })
+            ->when($draw_id, function ($query, $draw_id) {
+                return $query->where('draw_id', $draw_id);
+            })
+            ->when($status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
+            ->get();  
+            
         return view('pages.admin.report.result', compact('data', 'lot', 'draw'));
     }
 }

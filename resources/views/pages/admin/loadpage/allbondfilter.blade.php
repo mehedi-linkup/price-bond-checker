@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'report-all', 'title' => 'All Report'])
+@extends('layouts.admin-master', ['pageName'=> 'report-all', 'title' => 'All Report Filter'])
 @section('admin-content')
 
 <main>
@@ -123,35 +123,5 @@
             $('#status_column').hide();
         }
     }
-
-    // $("#filter").on("submit", function(e) {
-    //     e.preventDefault();
-    //     var lotId = $('#lot_id').val();
-    //     var status = $('#status').val();
-    //     $('#lot_id').val('');
-    //     $('#status').val('');
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/reportWithfilter/",
-    //         data: '',
-    //         success: function(res) {
-    //             // console.log(res);
-    //             $('#replaceBondList').html(res);
-    //             $('#dataTable').DataTable();
-    //             $("#all").on("change", function(event) {
-    //                 if (event.target.checked) {
-    //                     $("[type=checkbox]").attr("checked", true)
-    //                 } else {
-    //                     $("[type=checkbox]").attr("checked", false)
-    //                 }
-    //             });    
-    //         }
-    //         });
-    // });
 </script>
 @endpush
