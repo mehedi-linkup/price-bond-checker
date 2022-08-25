@@ -17,10 +17,10 @@
                         <form action="{{ (@$lotData) ? route('lot.update', $lotData->id) : route('lot.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group row">
-                                        <label for="Number" class="col-sm-3 col-form-label mt-2"> Lot Number <span class="text-danger">*</span> </label>
-                                        <div class="col-sm-9 mt-2">
+                                <div class="col-md-12">
+                                    <div class="form-group row mb-0">
+                                        <label for="Number" class="col-sm-3 col-form-label col-form-label-sm"> Lot Number <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9">
                                             <input type="number" name="number" value="{{ @$lotData ? $lotData->number : old('number')}}" class="form-control form-control-sm mb-2" id="Number" placeholder="Lot Number">
                                         </div>
                                         @error('number') <span style="color: red">{{$message}}</span><br> @enderror

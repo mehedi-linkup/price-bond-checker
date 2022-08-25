@@ -16,10 +16,10 @@
                         <form action="{{ (@$drawData) ? route('draw.update', $drawData->id) : route('draw.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group row">
-                                        <label for="draw" class="col-sm-3 col-form-label mt-2">Draw Number <span class="text-danger">*</span> </label>
-                                        <div class="col-sm-9 mt-2">
+                                <div class="col-md-12">
+                                    <div class="form-group row mb-0">
+                                        <label for="draw" class="col-sm-3 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9">
                                             <input type="number" name="draw" value="{{ @$drawData ? $drawData->draw : old('draw')}}" class="form-control form-control-sm mb-2" id="draw" placeholder="Draw Number">
                                         </div>
                                         @error('draw') <span style="color: red">{{$message}}</span><br> @enderror

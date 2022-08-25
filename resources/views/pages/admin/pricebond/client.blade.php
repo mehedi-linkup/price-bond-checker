@@ -17,10 +17,10 @@
                         <form action="{{ (@$clientData) ? route('client.update', $clientData->id) : route('client.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <div class="form-group row">
-                                        <label for="name" class="col-sm-3 col-form-label mt-2">Client Name <span class="text-danger">*</span> </label>
-                                        <div class="col-sm-9 mt-2">
+                                <div class="col-md-12">
+                                    <div class="form-group row mb-0">
+                                        <label for="name" class="col-sm-3 col-form-label col-form-label-sm">Client Name <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9">
                                             <input type="text" name="name" value="{{ @$clientData ? $clientData->name : old('name')}}" class="form-control form-control-sm mb-2" id="name" placeholder="Client Name">
                                         </div>
                                         @error('name') <span style="color: red">{{$message}}</span><br> @enderror

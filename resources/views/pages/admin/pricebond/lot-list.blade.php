@@ -19,7 +19,7 @@
                                     <p class="text-center m-0 p-1" style="border-top: 1px solid rgba(128, 128, 128, 0.384)">
                                         <span class="text-success text-center">(Items {{ $item->userbond->count() }})</span>
                                     </p>
-                                    <span style="position: absolute;right: 43px;top: 46px;font-size: 27px;text-transform: uppercase;font-weight: 700;color: #ff0707;">Lot {{ $item->number }}</span>
+                                    <span class="lot-number">{{ $item->number }}</span>
                                 </div>
                                 <a class="bond-link" href="{{ route('bond.with.lot', $item->id) }}"></a>
                             </div>

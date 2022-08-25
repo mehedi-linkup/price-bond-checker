@@ -89,7 +89,7 @@
                                                         @elseif($item->status == 's')
                                                             <span class="badge badge-success">{{ 'Sold' }}</span>
                                                         @else
-                                                            {{ 'Unknown' }}
+                                                            <span class="badge badge-secondary">{{ 'Unknown' }}</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>

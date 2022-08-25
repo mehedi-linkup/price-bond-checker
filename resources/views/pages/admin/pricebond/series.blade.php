@@ -17,15 +17,15 @@
                         <form action="{{ (@$bondData) ? route('bond-series.update', $bondData->id) : route('bond-series.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-12">
                                     {{-- <label for="series" class="mb-2"> Bond Series <span class="text-danger">*</span> </label>
                                     <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
                                     @error('series') <span style="color: red">{{$message}}</span><br> @enderror --}}
 
 
-                                    <div class="form-group row">
-                                        <label for="series" class="col-sm-3 col-form-label mt-2"> Bond Series <span class="text-danger">*</span> </label>
-                                        <div class="col-sm-9 mt-2">
+                                    <div class="form-group row mb-0">
+                                        <label for="series" class="col-sm-3 col-form-label col-form-label-sm"> Bond Series <span class="text-danger">*</span> </label>
+                                        <div class="col-sm-9">
                                             <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
                                         </div>
                                         @error('series') <span style="color: red">{{$message}}</span><br> @enderror

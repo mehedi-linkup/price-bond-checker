@@ -1,6 +1,6 @@
 @extends('layouts.admin-master', ['pageName'=> 'winner-list', 'title' => 'Add Winner List'])
-@section('admin-content')
 
+@section('admin-content')
 <main>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -17,9 +17,9 @@
                     <div class="card-body">
                         <form action="{{ (@$winnerData) ? route('price-winner.update', $winnerData->id) : route('price-winner.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row mb-2">
+                            <div class="row">
                                 <div class="col-md-6 my-2">
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-0">
                                         <label for="draw_id" class="col-sm-3 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <select name="draw_id" class="form-control form-control-sm d-inline-block mb-2" style="width: 88%" id="draw_id">
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 my-2">
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-0">
                                         <label for="price_list_id" class="col-sm-3 col-form-label">Prize Serial <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <select name="price_list_id" class="form-control form-control-sm d-inline-block mb-2"  style="width: 88%" id="price_list_id">
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-2">
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-0">
                                         <label for="bond_number" class="col-sm-3 col-form-label">Bond Number<span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <input type="number" name="bond_number" value="{{ @$winnerData ? $winnerData->bond_number : old('bond_number')}}" class="form-control form-control-sm mb-2" id="bond_number" placeholder="Bond Number">
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <div class="form-group row">
+                                    <div class="form-group row mb-0">
                                         <label for="draw_date" class="col-sm-3 col-form-label">Draw Date</label>
                                         <div class="col-sm-9">
                                             <input type="date" class="form-control form-control-sm mb-2" id="draw_date" name="draw_date" value="{{ @$winnerData ? $winnerData->draw_date : date('Y-m-d') }}" min="2022-01-31" max="2022-10-31">

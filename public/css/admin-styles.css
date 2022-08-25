@@ -1659,9 +1659,13 @@ pre code {
   margin-bottom: 1rem;
   color: #212529;
 }
-.table th,
-.table td {
+.table th {
   padding: 5px;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+.table td {
+  padding: 0;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
@@ -10399,6 +10403,18 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+}
+.bond-box {
+  position: relative;
+}
+.lot-number {
+  position: absolute;
+  left: 55px;
+  top: 46px;
+  font-size: 27px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff0707;
 }
 .th_parent {
   position: relative;
