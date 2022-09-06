@@ -10425,3 +10425,6 @@ body {
   top: 0;
   font-weight: 600;
 }
+.allbond tbody tr td {
+  padding: 3px;
+}

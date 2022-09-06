@@ -112,5 +112,4 @@ Route::group(['middleware' => ['auth']] , function(){
     // Ajax request route
     Route::post('/reportWithfilter', [UserBondController::class, 'reportWithfilter'])->name('reportWithfilter');
 
-
 });
