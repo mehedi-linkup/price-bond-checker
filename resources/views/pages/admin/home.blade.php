@@ -3,7 +3,8 @@
 @push('admin-js')
     <style>
         .card-anon-pen {
-            border: 2px solid linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+            background:linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+            padding: 3px;
             overflow: hidden;
         }
         .card-anon-pen:hover {
@@ -39,31 +40,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <div class="card card-anon-pen text-white mb-4" style="background: #1487e6">
-                    <div class="card-body">
+                <div class="card card-anon-pen text-white mb-4">
+                    <div class="card-body" style="background: #262552;">
                         <div>Total Stock</div>
                         <span>{{$userbond}}</span>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="card-footer d-flex align-items-center justify-content-between" style="background: #262552;border-color:#fff">
                         <a class="small text-white stretched-link" href="{{ route('userbond') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #f025c4">
-                    <div class="card-body">
+                <div class="card card-anon-pen text-white mb-4">
+                    <div class="card-body" style="background: #262552;">
                         <div>Sold Bond</div>
                         <span>{{ $soldbond }}</span>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="card-footer d-flex align-items-center justify-content-between" style="background: #262552;border-color:#fff">
                         <a class="small text-white stretched-link" href="#!">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #9b0e20">
+                <div class="card card-anon-pen text-white mb-4">
                     <div class="card-body">
                         <div>Total Winner</div>
                         <span>{{$pricewinner}}</span>
@@ -75,7 +76,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #0e9b59">
+                <div class="card card-anon-pen text-white mb-4">
                     <div class="card-body">
                         <div>Total Lot</div>
                         <span>{{$lot}}</span>
