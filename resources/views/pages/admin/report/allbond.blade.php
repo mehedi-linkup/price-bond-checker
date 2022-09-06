@@ -83,10 +83,10 @@
                                             @if($item->status == 's')
                                             <span class="badge badge-success">Sold</span>
                                             @else
-                                            <span class="badge badge-warning">Unsold</span>
+                                            <span class="badge badge-secondary">Active</span>
                                             @endif
                                         </td>
-                                        <td>{{  date('F j, Y',strtotime($item->date))}}</td>
+                                        <td>{{  date('F j, Y',strtotime($item->purchase_date))}}</td>
                                         <td>
                                             @if($item->status == 's')
                                             {{  date('F j, Y',strtotime($item->updated_at)) }}

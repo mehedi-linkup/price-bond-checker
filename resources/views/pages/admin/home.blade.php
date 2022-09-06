@@ -1,5 +1,36 @@
 @extends('layouts.admin-master', ['pageName'=> 'dashboard', 'title' => 'Dashboard'])
 {{-- @section('title', 'Dashboard') --}}
+@push('admin-js')
+    <style>
+        .card-anon-pen {
+            border: 2px solid linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+            overflow: hidden;
+        }
+        .card-anon-pen:hover {
+            -webkit-animation: play 1.6s ease-in infinite;
+        }
+        @-webkit-keyframes play {
+            0% {
+                background-position: 0px;
+            }
+            20% {
+                background-position: -110px;
+            }
+            35% {
+                background-position: -180px;
+            }
+            50% {
+                background-position: -210px;
+            }
+            80% {
+                background-position: -350px;
+            }
+            100% {
+                background-position: -390px;
+            }
+        }
+    </style>
+@endpush
 @section('admin-content')
 <main>
     <div class="heading-title">
@@ -8,9 +39,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <div class="card text-white mb-4" style="background: #1487e6">
+                <div class="card card-anon-pen text-white mb-4" style="background: #1487e6">
                     <div class="card-body">
-                        <div>Purchased Bond</div>
+                        <div>Total Stock</div>
                         <span>{{$userbond}}</span>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">

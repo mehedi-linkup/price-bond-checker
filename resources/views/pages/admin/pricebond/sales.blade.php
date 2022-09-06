@@ -53,8 +53,8 @@
                                                 <th>SL</th>
                                                 <th>Lot Number</th>
                                                 <th>Series No</th>
-                                                <th>Bond Number</th>
-                                                <th>Price</th>
+                                                <th class="text-left">Bond Number</th>
+                                                <th class="text-left">Price</th>
                                                 <th>Status</th>
                                                 <th>Purchase Date</th>
                                                 {{-- <th>Sold Date</th> --}}
@@ -84,15 +84,15 @@
                                                     <td class="text-left">{{ $item->bond_number }}</td>
                                                     <td class="text-left">{{ $item->price }}</td>
                                                     <td>
-                                                        @if ($item->status == 'p')
-                                                            <span class="badge badge-warning">{{ 'Unsold' }}</span>
+                                                        @if ($item->status == 'a')
+                                                            <span class="badge badge-secondary">{{ 'Active' }}</span>
                                                         @elseif($item->status == 's')
                                                             <span class="badge badge-success">{{ 'Sold' }}</span>
                                                         @else
                                                             <span class="badge badge-secondary">{{ 'Unknown' }}</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>
+                                                    <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
                                                     {{-- <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td> --}}
                                                     {{-- <td>
                                                         <a href="{{ route('userbond.edit', $item->id) }}"

@@ -18,9 +18,9 @@
                                 <div class="form-group row mb-0">
                                     <label for="purchase_date" class="col-sm-3 col-form-label col-form-label-sm">  Entry Date <span class="text-danger">*</span> </label>
                                     <div class="col-sm-9">
-                                        <input type="date" name="date" value="{{ @$bondData ? $bondData->date : date('Y-m-d') }}" class="form-control form-control-sm mb-2" id="purchase_date">
+                                        <input type="date" name="purchase_date" value="{{ @$bondData ? date('Y-m-d', strtotime($bondData->purchase_date)) : date('Y-m-d') }}" class="form-control form-control-sm mb-2" id="purchase_date">
                                     </div>
-                                    @error('date') <span style="color: red">{{$message}}</span><br> @enderror
+                                    @error('purchase_date') <span style="color: red">{{$message}}</span><br> @enderror
                                 </div>       
                             </div>
                             <div class="col-md-6 mb-2">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <div class="form-group row mb-0">
-                                    <label for="bond_number" class="col-sm-3 col-form-label col-form-label-sm">   Bond Number <span class="text-danger">*</span></label>
+                                    <label for="bond_number" class="col-sm-3 col-form-label col-form-label-sm"> Bond Number <span class="text-danger">*</span></label>
                                     <div class="col-sm-9">
                                         <input type="number" name="bond_number" value="{{ @$bondData ? $bondData->bond_number : old('bond_number')}}" class="form-control form-control-sm mb-2" id="bond_number" placeholder="Bond Number">
                                     </div>
@@ -93,6 +93,15 @@
                                         <input type="number" name="price" value="{{ @$bondData ? $bondData->price : old('price')}}" class="form-control form-control-sm mb-2" id="price" placeholder="Enter Price">
                                     </div>
                                     @error('price') <span style="color: red">{{$message}}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group row mb-0">
+                                    <label for="source" class="col-sm-3 col-form-label col-form-label-sm">Purchase Source</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="source" value="{{ @$bondData ? $bondData->source : old('source')}}" class="form-control form-control-sm mb-2" id="source" placeholder="Enter Source">
+                                    </div>
+                                    @error('source') <span style="color: red">{{$message}}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -164,7 +173,7 @@
                                                         {{ 'Unknown' }}
                                                         @endif
                                                     </td> --}}
-                                                    <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>
+                                                    <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
                                                     {{-- <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td> --}}
                                                     <td>
                                                         <a href="{{ route('userbond.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>

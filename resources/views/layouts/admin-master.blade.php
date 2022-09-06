@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Admin | {{ $title ?? '' }}</title>
-        {{-- <link rel="shortcut icon" href="{{ $content->logo }}" type="image/x-icon"> --}}
+        <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
         <link href="{{ asset('css/admin-styles.css') }}" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +75,14 @@
             }
             toastr.success("{{ session('success') }}");
             @endif
-    
+            @if(Session::has('info'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.success("{{ session('info') }}");
+            @endif
             @if(Session::has('error'))
             toastr.options =
             {

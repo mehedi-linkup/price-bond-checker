@@ -23,11 +23,13 @@ class CreateUserBondsTable extends Migration
                 ->onDelete('cascade');
             $table->string('bond_number');
             $table->string('price');
-            $table->string('status', 3)->default('p');
-            $table->date('date');
+            $table->string('source');
+            $table->char('status', 1)->default('a');
+            $table->date('sold_date')->nullable();
+            $table->date('purchase_date');
             $table->foreignId('client_id')
-                ->constrained('clients')
-                ->nullable();
+                ->nullable()
+                ->constrained('clients');
             $table->softDeletes();
             $table->timestamps();
         });

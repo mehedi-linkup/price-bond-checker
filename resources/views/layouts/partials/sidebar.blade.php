@@ -32,7 +32,7 @@
                 </a> --}}
                 <a class="nav-link {{ ($pageName == 'report-all' || $pageName == 'report-draw' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
                     <div class="sb-nav-link-icon"><i class="fas fa-flag-checkered"></i></div>
-                    Report
+                    Reports
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse {{ ($pageName == 'report-all' || $pageName == 'report-draw' ? 'show' : '') }}" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">

@@ -24,25 +24,37 @@ class UserBondController extends Controller
     }
     public function store(Request $request) {
         $request->validate([
-            'date' => 'required|date',
-            'lot_id' => 'required',
-            'series_id' => 'required',
-            'bond_number' => 'required|numeric|digits:7',
-            'price' => 'required|numeric|digits_between:2,3'
+            'purchase_date' => 'required|date',
+            'lot_id'        => 'required',
+            'series_id'     => 'required',
+            'bond_number'   => 'required|numeric|digits:7',
+            'price'         => 'required|numeric|digits_between:2,3',
+            'source'        => 'max:255'
         ]);
-        
-        try {            
+
+        $check_exist = UserBond::where('series_id',$request->series_id)->where('bond_number',$request->bond_number)->first();
+        if($check_exist) {
+            if($check_exist->status == 's') {
+                $check_exist->status = 'a';
+                $check_exist->update();
+                return redirect()->back()->with('info', 'Bond\'s Status Has Beed Changed!');
+            } else {
+                return redirect()->back()->with('error', 'Duplicate Entry!');
+            }
+        }
+        try { 
             $userBond = new UserBond();
             $userBond->bond_number = $request->bond_number;
-            $userBond->date = $request->date;
+            $userBond->purchase_date = $request->purchase_date;
             $userBond->lot_id = $request->lot_id;
             $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
+            $userBond->source = $request->source;
             $userBond->save();
             return Redirect()->back()->with('success', 'Insert Success!');
         } catch (\Throwable $th) {
-            throw $th;
-            // return Redirect()->back()->with('error', 'Insert Failed!');
+            // throw $th;
+            return Redirect()->back()->with('error', 'Insert Failed!');
         }
     }
     public function edit($id) {
@@ -56,19 +68,32 @@ class UserBondController extends Controller
     public function update(Request $request, $id) {
         $request->validate([
             'bond_number' => 'required|numeric|digits:7',
-            'date' => 'required|date',
+            'purchase_date' => 'required|date',
             'lot_id' => 'required',
             'series_id' => 'required',
-            'price' => 'required|numeric|digits_between:2,3'
+            'price' => 'required|numeric|digits_between:2,3',
+            'source' => 'max:255'
         ]);
+
+        $check_exist = UserBond::where('series_id',$request->series_id)->where('bond_number', $request->bond_number)->where('id', '!=', $id)->first();
+        if($check_exist) {
+            // if($check_exist->status == 's') {
+            //     $check_exist->status = 'a';
+            //     $check_exist->update();
+            //     return redirect()->back()->with('info', 'Bond\'s Status Has Beed Changed!');
+            // } else {
+                return redirect()->back()->with('error', 'Duplicate Entry!');
+            // }
+        }
         
         try {
             $userBond = UserBond::find($id);
             $userBond->bond_number = $request->bond_number;
-            $userBond->date = $request->date;
+            $userBond->purchase_date = $request->purchase_date;
             $userBond->lot_id = $request->lot_id;
             $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
+            $userBond->source = $request->source;
             $userBond->update();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
@@ -137,7 +162,7 @@ class UserBondController extends Controller
     public function sales() {
         $series = BondSeries::all();
         $lot = Lot::all();
-        $bondlist = UserBond::where('status', 'p')->latest()->get();
+        $bondlist = UserBond::where('status', 'a')->latest()->get();
         $client = Client::latest()->get();
         return view('pages.admin.pricebond.sales', compact('bondlist', 'series', 'lot', 'client'));
     }
@@ -183,8 +208,6 @@ class UserBondController extends Controller
             }
             return Redirect()->back()->with('success', 'Selected Bonds Sold!');
         } catch (\Throwable $th) {
-            // throw $th;
-            // return $th->getMessage();
             return Redirect()->back()->with('error', 'Selected Bonds Unsold!');
         }
     }
