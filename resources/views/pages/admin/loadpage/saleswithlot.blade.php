@@ -35,12 +35,12 @@
                         <td>{{ $item->bond_number }}</td>
                         <td>{{ $item->price }}</td>
                         <td>
-                            @if($item->status == 'p')
-                            <span class="badge badge-warning">{{ 'Unsold' }}</span>
+                            @if($item->status == 'a')
+                            <span class="badge badge-secondary">Active</span>
                             @elseif($item->status == 's')
-                            <span class="badge badge-success">{{ 'Sold' }}</span>
+                            <span class="badge badge-success">Sold</span>
                             @else
-                            {{ 'Unknown' }}
+                            <span class="badge badge-light">Unknown</span>
                             @endif
                         </td>
                         <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>

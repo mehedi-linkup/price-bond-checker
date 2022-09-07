@@ -8,7 +8,8 @@
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
-                       Lot Number {{ $lotitem = \App\Models\lot::find($lot->id)->number; }}
+                        Lot Number {{$lot->number}}
+                       {{-- Lot Number {{ $lotitem = \App\Models\lot::find($lot->id)->number; }} --}}
                        <span class="float-right">
                         <a href="{{ route('lot.list') }}" class="btn btn-sm btn-primary">Back</a>
                        </span>
@@ -25,6 +26,8 @@
                                         <th>Price</th>
                                         <th>Status</th>
                                         <th>Purchase Date</th>
+                                        <th>Sold Date</th>
+                                        <th>Purchase From</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -48,15 +51,17 @@
                                         <td>{{ $item->bond_number }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>
-                                            @if($item->status == 'p')
-                                            <span class="badge badge-warning">{{ 'Unsold' }}</span>
+                                            @if($item->status == 'a')
+                                            <span class="badge badge-secondary">{{ 'Active' }}</span>
                                             @elseif($item->status == 's')
                                             <span class="badge badge-success">{{ 'Sold' }}</span>
                                             @else
                                             {{ 'Unknown' }}
                                             @endif
                                         </td>
-                                        <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>
+                                        <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
+                                        <td>{{ @$item->sold_date ? (date('Fj, Y', strtotime($item->sold_date))) : '---' }}</td>
+                                        <td>{{ @$item->source? $item->source->name : 'Unknown' }}</td>
                                         <td>
                                             <a href="{{ route('userbond.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
                                             <a href="{{ route('userbond.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -80,6 +85,13 @@
 @endsection
 
 @push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
     <script>
         // $("#all").on("change", function(event) {
         //     if (event.target.checked) {

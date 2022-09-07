@@ -80,3 +80,12 @@
     </div>
 </main>
 @endsection
+@push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
+@endpush

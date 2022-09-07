@@ -1,7 +1,6 @@
 @extends('layouts.admin-master', ['pageName'=> 'lot-list', 'title' => 'Lot List'])
 @push('admin-css')
  <style>
-    /* CSS */
 .button-71 {
   background-color: #0078d0;
   border: 0;
@@ -45,9 +44,10 @@
 }
 
 @media (min-width: 768px) {
-  .button-71 {
-    padding: 16px 48px;
-  }
+    .button-71 {
+        padding: 30px 48px;
+        width: 100%;
+    }
 }
 </style>   
 @endpush
@@ -85,3 +85,12 @@
     </div>
 </main>
 @endsection
+@push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
+@endpush

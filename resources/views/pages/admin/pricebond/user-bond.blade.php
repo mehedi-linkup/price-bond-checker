@@ -95,7 +95,7 @@
                                     @error('price') <span style="color: red">{{$message}}</span> @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            {{-- <div class="col-md-6 mb-2">
                                 <div class="form-group row mb-0">
                                     <label for="source" class="col-sm-3 col-form-label col-form-label-sm">Purchase Source</label>
                                     <div class="col-sm-9">
@@ -103,6 +103,33 @@
                                     </div>
                                     @error('source') <span style="color: red">{{$message}}</span> @enderror
                                 </div>
+                            </div> --}}
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group row mb-0">
+                                    <label for="source" class="col-sm-3 col-form-label col-form-label-sm"> Purchase Source </span> </label>
+                                    <div class="col-sm-9">
+                                        <select name="source_id" class="form-control form-control-sm d-inline-block mb-2" id="source" style="width: 88%">
+                                            @if(@$bondData)
+                                                <option value="">Select Source</option>
+                                                @foreach($source as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == @$bondData->source_id ? 'selected' : '' }} >{{ $item->name }}</option>
+                                                @endforeach
+                                            @elseif(old('source_id'))
+                                                <option value="">Select Source</option>
+                                                @foreach($source as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == old('source_id') ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                @endforeach
+                                            @else
+                                                <option value="">Select Source</option>
+                                                @foreach($source as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            @endif 
+                                        </select>
+                                        <a href="{{ route('source.all') }}" class="add-item"><i class="fas fa-plus-circle"></i></a>
+                                        @error('source_id') <span style="color: red">{{$message}}</span> @enderror
+                                    </div>
+                                </div>    
                             </div>
                         </div>
                         
@@ -142,6 +169,7 @@
                                                     <th>Price</th>
                                                     {{-- <th>Status</th> --}}
                                                     <th>Purchase Date</th>
+                                                    <th>Purchase Source</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -164,17 +192,8 @@
                                                     </td>                                      
                                                     <td>{{ $item->bond_number }}</td>
                                                     <td>{{ $item->price }}</td>
-                                                    {{-- <td>
-                                                        @if($item->status == 'p')
-                                                        <span class="badge badge-warning">{{ 'Unsold' }}</span>
-                                                        @elseif($item->status == 's')
-                                                        <span class="badge badge-success">{{ 'Sold' }}</span>
-                                                        @else
-                                                        {{ 'Unknown' }}
-                                                        @endif
-                                                    </td> --}}
                                                     <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
-                                                    {{-- <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td> --}}
+                                                    <td>{{ @$item->source? $item->source->name : 'Unknown'}}</td>
                                                     <td>
                                                         <a href="{{ route('userbond.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
                                                         <a href="{{ route('userbond.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -195,3 +214,12 @@
     </div>
 </main>
 @endsection
+@push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
+@endpush

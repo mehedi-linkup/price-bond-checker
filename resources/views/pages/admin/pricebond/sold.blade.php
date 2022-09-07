@@ -59,7 +59,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-danger">{{ $item->client->name }}</td>
-                                                <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td>
+                                                <td>{{ date('Fj, Y', strtotime(@$item->sold_date? $item->sold_date : $item->updated_at)) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -72,5 +72,13 @@
         </div>
     </main>
 @endsection
-
+@push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
+@endpush
    

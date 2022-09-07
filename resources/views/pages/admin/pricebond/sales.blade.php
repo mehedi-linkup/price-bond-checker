@@ -1,4 +1,26 @@
 @extends('layouts.admin-master', ['pageName' => 'sale', 'title' => 'Sale Bonds'])
+@push('admin-css')
+<style>
+    .col-form-label-sm {
+        text-transform: uppercase;
+        font-size: 0.80rem;
+        font-weight: 400;
+    }
+    .form-control-sm {
+        font-size: 0.80rem;
+        border-radius: 0;
+    }
+    .form-control:focus {
+        box-shadow: none;
+    }
+    .btn-form-info:focus, .btn-form-info.focus {
+        box-shadow: none;
+    }
+    .btn-sm, .btn-group-sm > .btn {
+        border-radius: 0;
+    }
+</style>
+@endpush
 @section('admin-content')
     <main>
         <div class="container-fluid">
@@ -26,9 +48,6 @@
                                         <label for="client_id" class="col-sm-4 col-form-label col-form-label-sm">Client
                                             Name</label>
                                         <div class="col-sm-8">
-                                            {{-- <input type="text" name="name" class="form-control form-control-sm"
-                                                id="client_name" placeholder="Insert Client Name"> --}}
-
                                             <select name="client_id" class="form-control form-control-sm col-sm-8" id="client_id">
                                                 <option value=""selected>Select Client</option>
                                                 @foreach ($client as $item)
@@ -39,8 +58,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 ml-auto">
-                                    <button type="submit" class="btn btn-sm btn-primary px-5">Sell</button>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="btn btn-sm btn-info btn-form-info px-5">Sell</button>
                                 </div>
                             </div>
                             <div id="replaceBondList" class="card-body">
@@ -57,6 +76,7 @@
                                                 <th class="text-left">Price</th>
                                                 <th>Status</th>
                                                 <th>Purchase Date</th>
+                                                <th>Purchase Source</th>
                                                 {{-- <th>Sold Date</th> --}}
                                                 {{-- <th>Action</th> --}}
                                             </tr>
@@ -89,10 +109,11 @@
                                                         @elseif($item->status == 's')
                                                             <span class="badge badge-success">{{ 'Sold' }}</span>
                                                         @else
-                                                            <span class="badge badge-secondary">{{ 'Unknown' }}</span>
+                                                            <span class="badge badge-light">{{ 'Unknown' }}</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
+                                                    <td>{{ $item->source? $item->source->name : 'Unknown'}}</td>
                                                     {{-- <td>{{ date('Fj, Y', strtotime($item->updated_at)) }}</td> --}}
                                                     {{-- <td>
                                                         <a href="{{ route('userbond.edit', $item->id) }}"
@@ -123,6 +144,13 @@
 @endsection
 
 @push('admin-js')
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
     <script>
         $("#all").on("change", function(event) {
             if (event.target.checked) {
@@ -133,7 +161,7 @@
         });
         $("#lot_id").on("change", function(event) {
             var lotId = $('#lot_id').val();
-            console.log(lotId);
+            // console.log(lotId);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

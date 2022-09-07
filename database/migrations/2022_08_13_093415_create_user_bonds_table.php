@@ -23,7 +23,9 @@ class CreateUserBondsTable extends Migration
                 ->onDelete('cascade');
             $table->string('bond_number');
             $table->string('price');
-            $table->string('source');
+            $table->foreignId('source_id')
+                ->nullable()
+                ->constrained('sources');
             $table->char('status', 1)->default('a');
             $table->date('sold_date')->nullable();
             $table->date('purchase_date');

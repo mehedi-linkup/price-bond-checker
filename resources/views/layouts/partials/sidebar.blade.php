@@ -47,12 +47,12 @@
                         </a> 
                     </nav>
                 </div>
-                <a class="nav-link {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' || $pageName == 'client' || $pageName == 'draw' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
+                <a class="nav-link {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'price-list' || $pageName == 'client' || $pageName == 'source' || $pageName == 'draw' ? 'active' : 'collapsed') }}" href="#" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
                     <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                     Settings
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'prize-list' || $pageName == 'client' || $pageName == 'draw' ? 'show' : '') }}" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div class="collapse {{ ($pageName == 'lot' || $pageName == 'bond-series' || $pageName == 'prize-list' || $pageName == 'client'|| $pageName == 'source' || $pageName == 'draw' ? 'show' : '') }}" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('lot') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
@@ -73,6 +73,10 @@
                         <a class="nav-link" href="{{ route('client.all') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
                             Add Client
+                        </a>
+                        <a class="nav-link" href="{{ route('source.all') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus-circle"></i></div>
+                            Add Source
                         </a>
                     </nav>
                 </div>

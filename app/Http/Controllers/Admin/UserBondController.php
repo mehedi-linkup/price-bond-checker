@@ -11,6 +11,7 @@ use App\Models\BondSeries;
 use App\Models\PriceWinner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Source;
 use Illuminate\Support\Facades\Redirect;
 
 class UserBondController extends Controller
@@ -18,9 +19,10 @@ class UserBondController extends Controller
     public function index() {
         $series = BondSeries::latest()->get();
         $lot = Lot::latest()->get();
+        $source = Source::latest()->get();
         $lotwithBond = Lot::with('userbond')->get();
         $bondlist = UserBond::latest()->get();
-        return view('pages.admin.pricebond.user-bond', compact('bondlist', 'series', 'lot', 'lotwithBond'));
+        return view('pages.admin.pricebond.user-bond', compact('bondlist', 'series', 'lot', 'lotwithBond', 'source'));
     }
     public function store(Request $request) {
         $request->validate([
@@ -29,15 +31,13 @@ class UserBondController extends Controller
             'series_id'     => 'required',
             'bond_number'   => 'required|numeric|digits:7',
             'price'         => 'required|numeric|digits_between:2,3',
-            'source'        => 'max:255'
         ]);
-
         $check_exist = UserBond::where('series_id',$request->series_id)->where('bond_number',$request->bond_number)->first();
         if($check_exist) {
             if($check_exist->status == 's') {
                 $check_exist->status = 'a';
                 $check_exist->update();
-                return redirect()->back()->with('info', 'Bond\'s Status Has Beed Changed!');
+                return redirect()->back()->with('info', 'Bond\'s Status Has Been Changed!');
             } else {
                 return redirect()->back()->with('error', 'Duplicate Entry!');
             }
@@ -49,7 +49,7 @@ class UserBondController extends Controller
             $userBond->lot_id = $request->lot_id;
             $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
-            $userBond->source = $request->source;
+            $userBond->source_id = $request->source_id;
             $userBond->save();
             return Redirect()->back()->with('success', 'Insert Success!');
         } catch (\Throwable $th) {
@@ -71,8 +71,7 @@ class UserBondController extends Controller
             'purchase_date' => 'required|date',
             'lot_id' => 'required',
             'series_id' => 'required',
-            'price' => 'required|numeric|digits_between:2,3',
-            'source' => 'max:255'
+            'price' => 'required|numeric|digits_between:2,3'
         ]);
 
         $check_exist = UserBond::where('series_id',$request->series_id)->where('bond_number', $request->bond_number)->where('id', '!=', $id)->first();
@@ -93,7 +92,7 @@ class UserBondController extends Controller
             $userBond->lot_id = $request->lot_id;
             $userBond->series_id = $request->series_id;
             $userBond->price = $request->price;
-            $userBond->source = $request->source;
+            $userBond->source_id = $request->source_id;
             $userBond->update();
             return Redirect()->back()->with('success', 'Update Successful!');
         } catch (\Throwable $th) {
@@ -123,12 +122,15 @@ class UserBondController extends Controller
     public function allbond() {
         $lot = Lot::latest()->get();
         $draw = Draw::latest()->get();
-        $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
-        return view('pages.admin.report.allbond', compact('userbond', 'lot', 'draw'));
+        $userbond = UserBond::with('lot', 'bondseries', 'source')->latest()->get();
+        $userbondStatus = new UserBond;
+        $totalprice = $userbondStatus->sum('price');
+        $totalstock = $userbondStatus->count();
+        return view('pages.admin.report.allbond', compact('userbond', 'lot', 'draw', 'totalprice', 'totalstock'));
     }
 
     // Ajax request
-    public function reportWithfilter(Request $request) {
+    public function reportallFilter(Request $request) {
         $lot = Lot::latest()->get();
         $draw = Draw::latest()->get();
         // $userbond = UserBond::with('lot', 'bondseries')->latest()->get();
@@ -149,9 +151,10 @@ class UserBondController extends Controller
             ->when($status, function ($query, $status) {
                 return $query->where('status', $status);
             })
-            ->get();  
-            
-        return view('pages.admin.loadpage.allbondfilter', compact('lot', 'draw', 'userbond'));
+            ->latest()->get();  
+        $totalprice = $userbond->sum('price');
+        $totalstock = $userbond->count();
+        return view('pages.admin.loadpage.allbondfilter', compact('lot', 'draw', 'userbond', 'totalprice', 'totalstock'));
     }
 
     public function bondWithLot($id) {
@@ -176,7 +179,7 @@ class UserBondController extends Controller
     public function salesWithLot($id = null) {
         if($id == null) {
             // $lot = Lot::with('userbond')->latest()->get();
-            $bondlist = UserBond::where('status', 'p')->latest()->get();
+            $bondlist = UserBond::where('status', 'a')->latest()->get();
             // $data = ['data' => $bondlist];
             // return response()->json($data);
             return view('pages.admin.loadpage.saleswithlot', compact('bondlist'));
@@ -186,7 +189,7 @@ class UserBondController extends Controller
             // $data = ['data' => $lot];
             // return response()->json($data);
             // return response()->json($lot[0]->userbond);
-            $bondlist = UserBond::where('status', 'p')->where('lot_id', $id)->get();
+            $bondlist = UserBond::where('status', 'a')->where('lot_id', $id)->get();
             return view('pages.admin.loadpage.saleswithlot', compact('bondlist'));
         }
     }
@@ -203,6 +206,7 @@ class UserBondController extends Controller
             foreach ($value as $key => $item) {
                  $userbond = UserBond::find($item);
                  $userbond->client_id = $request->client_id;
+                 $userbond->sold_date = Carbon::now();
                  $userbond->status = 's';
                  $userbond->update();
             }

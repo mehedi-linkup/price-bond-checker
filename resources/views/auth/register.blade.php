@@ -111,6 +111,13 @@
 @endsection
 @push('admin-js')
 <script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+          "lengthMenu": [100, 150, 200, 300, 'All']
+        });
+      });
+</script>
+<script>
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

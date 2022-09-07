@@ -8,6 +8,7 @@ use App\Models\UserBond;
 use App\Models\PriceWinner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\PriceList;
 
 class joinController extends Controller
 {
@@ -24,8 +25,9 @@ class joinController extends Controller
     public function reportDraw() {
         $lot = Lot::latest()->get();
         $draw = Draw::latest()->get();
-        $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->get();
-        return view('pages.admin.report.result', compact('data', 'lot', 'draw'));
+        $data =[];
+        // $data = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->get();
+        return view('pages.admin.report.result', compact('lot', 'draw', 'data'));
     }
     public function reportLoad(Request $request) {
 
@@ -71,9 +73,18 @@ class joinController extends Controller
             })
             ->when($status, function ($query, $status) {
                 return $query->where('status', $status);
-            })
-            ->get();  
-            
-        return view('pages.admin.report.result', compact('data', 'lot', 'draw'));
+            });
+           $data1 = $data;
+        $totalStock = $data->count();
+        // Table::select('name','surname')->where('id', 1)->get();
+        $data = $data->get();
+        $priceListIdArr = $data1->select('price_list_id')->get();
+        $totalAmount = 0;
+        foreach ($priceListIdArr as $key => $item) {
+            $pricelist = PriceList::find($item->price_list_id);
+            $totalAmount += $pricelist->amount;
+        }
+        $totalArray = ['totalStock' => $totalStock, 'totalAmount' => $totalAmount];
+        return view('pages.admin.report.result', compact('data', 'lot', 'draw', 'totalArray'));
     }
 }

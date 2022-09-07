@@ -1,4 +1,4 @@
-@extends('layouts.admin-master', ['pageName'=> 'bond-series', 'title' => 'Add Bond Series'])
+@extends('layouts.admin-master', ['pageName'=> 'source', 'title' => 'Add Purchase Source Name'])
 @section('admin-content')
 <main>
     <div class="container-fluid">
@@ -6,41 +6,36 @@
             <div class="col-md-6">
                 <div class="card my-3">
                     <div class="card-header">
-                        @if(@isset($bondData))
-                        <i class="fas fa-edit mr-1"></i>Update Bond Series
+                        @if(@isset($sourceData))
+                        <i class="fas fa-edit mr-1"></i>Update Purchase Source
                         
                         @else
-                        <i class="fas fa-plus mr-1"></i>Add Bond Series
+                        <i class="fas fa-plus mr-1"></i>Add Purchase Source
                         @endif
                     </div>
                     <div class="card-body">
-                        <form action="{{ (@$bondData) ? route('bond-series.update', $bondData->id) : route('bond-series.store') }}" method="POST">
+                        <form action="{{ (@$sourceData) ? route('source.update', $sourceData->id) : route('source.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{-- <label for="series" class="mb-2"> Bond Series <span class="text-danger">*</span> </label>
-                                    <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
-                                    @error('series') <span style="color: red">{{$message}}</span><br> @enderror --}}
-
-
                                     <div class="form-group row mb-0">
-                                        <label for="series" class="col-sm-3 col-form-label col-form-label-sm"> Bond Series <span class="text-danger">*</span> </label>
+                                        <label for="name" class="col-sm-3 col-form-label col-form-label-sm">Source Name <span class="text-danger">*</span> </label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="series" value="{{ @$bondData ? $bondData->series : old('series')}}" class="form-control form-control-sm mb-2" id="series" placeholder="Bond Serial">
+                                            <input type="text" name="name" value="{{ @$sourceData ? $sourceData->name : old('name')}}" class="form-control form-control-sm mb-2" id="name" placeholder="Source Name">
                                         </div>
-                                        @error('series') <span style="color: red">{{$message}}</span><br> @enderror
-                                    </div>       
+                                        @error('name') <span style="color: red">{{$message}}</span><br> @enderror
+                                    </div>
                                 </div>
                             </div>
                             
                             <div class="clearfix border-top">
                                 <div class="float-md-right mt-2">
-                                    @if(@$bondData) 
-                                    <a href="{{ route('bond-series') }}" class="btn btn-dark btn-sm">Back</a>
+                                    @if(@$sourceData) 
+                                    <a href="{{ route('source.all') }}" class="btn btn-dark btn-sm">Back</a>
                                     @else
                                     <button type="reset" class="btn btn-dark btn-sm">Reset</button>
                                     @endif
-                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$bondData)?'Update':'Save'}}</button>
+                                    <button type="submit" class="btn btn-info btn-form-info btn-sm">{{(@$sourceData)?'Update':'Save'}}</button>
                                 </div>
                             </div>
                         </form>
@@ -52,7 +47,7 @@
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
-                        Bond Series List
+                        Purchase Source List
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -60,18 +55,18 @@
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Bond Series</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($bondseries as $key => $item)
+                                    @foreach ($source as $key => $item)
                                     <tr>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $item->series }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td>
-                                            <a href="{{ route('bond-series.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('bond-series.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('source.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('source.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -92,5 +87,5 @@
           "lengthMenu": [100, 150, 200, 300, 'All']
         });
       });
-</script>
+</script>   
 @endpush

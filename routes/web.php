@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Admin\LotController;
 use App\Http\Controllers\Admin\DrawController;
 use App\Http\Controllers\Admin\joinController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\SourceController;
 use App\Http\Controllers\Admin\UserBondController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\PriceListController;
@@ -12,7 +14,6 @@ use App\Http\Controllers\Admin\BondSeriesController;
 use App\Http\Controllers\Admin\PrizeWinnerController;
 use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\AuthenticationController;
-use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,12 @@ Route::group(['middleware' => ['auth']] , function(){
     Route::post('/client/update/{id}', [ClientController::class, 'update'])->name('client.update');
     Route::get('/client/delete/{id}', [ClientController::class, 'delete'])->name('client.delete');
 
+    Route::get('/source-all', [SourceController::class, 'index'])->name('source.all');
+    Route::post('/source/store', [SourceController::class, 'store'])->name('source.store');
+    Route::get('/source/edit/{id}', [SourceController::class, 'edit'])->name('source.edit');
+    Route::post('/source/update/{id}', [SourceController::class, 'update'])->name('source.update');
+    Route::get('/source/delete/{id}', [SourceController::class, 'delete'])->name('source.delete');
+
     Route::get('bond-series', [BondSeriesController::class, 'index'])->name('bond-series');
     Route::post('/bond-series/store', [BondSeriesController::class, 'store'])->name('bond-series.store');
     Route::get('/bond-series/edit/{id}', [BondSeriesController::class, 'edit'])->name('bond-series.edit');
@@ -106,10 +113,11 @@ Route::group(['middleware' => ['auth']] , function(){
 
     // Route in Report
     Route::get('/report/all', [UserBondController::class, 'allbond'])->name('report.all');
-    Route::get('/report-draw', [joinController::class, 'reportDraw'])->name('report.draw');
-    Route::post('/report-load', [joinController::class, 'reportLoad'])->name('report.load');
+    Route::post('/report/all/filter', [UserBondController::class, 'reportallFilter'])->name('report.allFilter');
+
+    Route::get('/report/draw', [joinController::class, 'reportDraw'])->name('report.draw');
+    Route::post('/report/draw/filter', [joinController::class, 'reportLoad'])->name('report.load');
 
     // Ajax request route
-    Route::post('/reportWithfilter', [UserBondController::class, 'reportWithfilter'])->name('reportWithfilter');
 
 });

@@ -20,4 +20,7 @@ class UserBond extends Model
     public function client() {
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
+    public function source() {
+        return $this->belongsTo(Source::class, 'source_id', 'id');
+    }
 }
