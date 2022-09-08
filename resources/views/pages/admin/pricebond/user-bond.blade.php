@@ -152,7 +152,7 @@
                 <div class="card my-3">
                     <div class="card-header">
                         <i class="fas fa-list mr-1"></i>
-                       Your Lot List
+                       Your Bond List
                     </div>
                     <div class="card-body">
                         <div class="row">
