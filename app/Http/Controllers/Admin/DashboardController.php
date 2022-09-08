@@ -16,8 +16,8 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        $userbond = UserBond::where('status', 'a')->count();
-        $totalvalue = UserBond::where('status', 'a')->sum('price');
+        $userbond = UserBond::count();
+        $totalvalue = UserBond::sum('price');
         $pricewinner = PriceWinner::join("user_bonds", "user_bonds.bond_number", "=", "price_winners.bond_number")->count();
         $lot = Lot::count();
         return view('pages.admin.home', compact('userbond', 'totalvalue', 'pricewinner', 'lot'));

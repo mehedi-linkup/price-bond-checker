@@ -11,6 +11,7 @@
                     <th>Price</th>
                     <th>Status</th>
                     <th>Purchase Date</th>
+                    <th>Purchase Source</th>
                     {{-- <th>Action</th> --}}
                 </tr>
             </thead>
@@ -22,7 +23,7 @@
                         <td>{{ $loop->index + 1  }}</td>
                         <td>
                             @php
-                                $lotitem = \App\Models\lot::find($item->lot_id);
+                                $lotitem = \App\Models\Lot::find($item->lot_id);
                             @endphp
                             {{ $lotitem->number }}
                         </td>
@@ -43,7 +44,8 @@
                             <span class="badge badge-light">Unknown</span>
                             @endif
                         </td>
-                        <td>{{ date('Fj, Y', strtotime($item->date)) }}</td>
+                        <td>{{ date('Fj, Y', strtotime($item->purchase_date)) }}</td>
+                        <td>{{ $item->source? $item->source->name : 'Unknown'}}</td>
                         {{-- <td>
                             <a href="{{ route('userbond.edit', $item->id) }}" class="btn btn-info btn-mod-info btn-sm"><i class="fas fa-edit"></i></a>
                             <a href="{{ route('userbond.delete', $item->id) }}" onclick="return confirm('Are you sure to Delete?')" class="btn btn-danger btn-mod-danger btn-sm"><i class="fas fa-trash"></i></a>

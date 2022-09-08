@@ -111,6 +111,9 @@ Route::group(['middleware' => ['auth']] , function(){
 
     Route::get('/sold', [UserBondController::class, 'sold'])->name('sold');
 
+    // Start Stock
+    Route::get('/stock/all', [UserBondController::class, 'allstock'])->name('stock.all');
+
     // Route in Report
     Route::get('/report/all', [UserBondController::class, 'allbond'])->name('report.all');
     Route::post('/report/all/filter', [UserBondController::class, 'reportallFilter'])->name('report.allFilter');

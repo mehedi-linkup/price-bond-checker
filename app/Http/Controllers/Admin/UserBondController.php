@@ -60,10 +60,11 @@ class UserBondController extends Controller
     public function edit($id) {
         $bondData = UserBond::find($id);
         $bondlist = UserBond::latest()->get();
+        $source = Source::latest()->get();
         $series = BondSeries::all();
         $lot = Lot::all();
         $lotwithBond = Lot::with('userbond')->get();
-        return view('pages.admin.pricebond.user-bond', compact('bondData', 'bondlist', 'series', 'lot',  'lotwithBond'));
+        return view('pages.admin.pricebond.user-bond', compact('bondData', 'bondlist', 'series', 'lot',  'lotwithBond', 'source'));
     }
     public function update(Request $request, $id) {
         $request->validate([
@@ -214,5 +215,14 @@ class UserBondController extends Controller
         } catch (\Throwable $th) {
             return Redirect()->back()->with('error', 'Selected Bonds Unsold!');
         }
+    } 
+    public function allstock(Request $request) {
+        $lot = Lot::latest()->get();
+        $draw = Draw::latest()->get();
+        $userbond = UserBond::with('lot', 'bondseries', 'source')->latest()->get();
+        $userbondStatus = new UserBond;
+        $totalprice = $userbondStatus->sum('price');
+        $totalstock = $userbondStatus->count();
+        return view('pages.admin.stock.all', compact('userbond', 'lot', 'draw', 'totalprice', 'totalstock'));
     }
 }

@@ -101,8 +101,8 @@
                                                         @endphp
                                                         {{ $seriesitem->series }}
                                                     </td>
-                                                    <td class="text-left">{{ $item->bond_number }}</td>
-                                                    <td class="text-left">{{ $item->price }}</td>
+                                                    <td>{{ $item->bond_number }}</td>
+                                                    <td>{{ $item->price }}</td>
                                                     <td>
                                                         @if ($item->status == 'a')
                                                             <span class="badge badge-secondary">{{ 'Active' }}</span>

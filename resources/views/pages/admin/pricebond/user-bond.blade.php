@@ -27,7 +27,7 @@
                                 <div class="form-group row mb-0">
                                     <label for="lot_id" class="col-sm-3 col-form-label col-form-label-sm"> Lot No <span class="text-danger">*</span> </label>
                                     <div class="col-sm-9">
-                                        <select name="lot_id" class="form-control form-control-sm d-inline-block mb-2" id="lot_id" style="width: 88%">
+                                        <select name="lot_id" class="form-control form-control-sm d-inline-block mb-2" id="lot_id">
                                             @if(@$bondData)
                                                 <option value="">Select Lot</option>
                                                 @foreach($lot as $item)
@@ -54,7 +54,7 @@
                                 <div class="form-group row mb-0">
                                     <label for="series_id" class="col-sm-3 col-form-label col-form-label-sm">Series No <span class="text-danger">*</span> </label>
                                     <div class="col-sm-9">
-                                        <select name="series_id" class="form-control form-control-sm d-inline-block mb-2" id="series_id" style="width: 88%">
+                                        <select name="series_id" class="form-control form-control-sm d-inline-block mb-2" id="series_id">
                                             @if(@$bondData)
                                                 <option value="">Select Series</option>
                                                 @foreach($series as $item)
@@ -108,7 +108,7 @@
                                 <div class="form-group row mb-0">
                                     <label for="source" class="col-sm-3 col-form-label col-form-label-sm"> Purchase Source </span> </label>
                                     <div class="col-sm-9">
-                                        <select name="source_id" class="form-control form-control-sm d-inline-block mb-2" id="source" style="width: 88%">
+                                        <select name="source_id" class="form-control form-control-sm d-inline-block mb-2" id="source">
                                             @if(@$bondData)
                                                 <option value="">Select Source</option>
                                                 @foreach($source as $item)

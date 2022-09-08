@@ -22,7 +22,7 @@
                                     <div class="form-group row mb-0">
                                         <label for="draw_id" class="col-sm-3 col-form-label col-form-label-sm">Draw Number <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <select name="draw_id" class="form-control form-control-sm d-inline-block mb-2" style="width: 88%" id="draw_id">
+                                            <select name="draw_id" class="form-control form-control-sm d-inline-block mb-2" id="draw_id">
                                                 @if(@$winnerData)
                                                 @foreach($draw as $item)
                                                 <option value="{{ $item->id }}" {{ $item->id == @$winnerData->draw_id ? 'selected' : '' }} >{{ $item->draw }}</option>
@@ -47,7 +47,7 @@
                                     <div class="form-group row mb-0">
                                         <label for="price_list_id" class="col-sm-3 col-form-label">Prize Serial <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <select name="price_list_id" class="form-control form-control-sm d-inline-block mb-2"  style="width: 88%" id="price_list_id">
+                                            <select name="price_list_id" class="form-control form-control-sm d-inline-block mb-2" id="price_list_id">
                                                 @if(@$winnerData)
                                                 @foreach($pricelist as $item)
                                                 <option value="{{ $item->id }}" {{ $item->id == @$winnerData->price_list_id ? 'selected' : '' }} >{{ $item->price_sl }}</option>
