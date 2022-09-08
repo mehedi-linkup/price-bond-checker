@@ -75,7 +75,7 @@
                         <span>{{$pricewinner}}</span>
                     </div> 
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <form id="form1" action="{{route('report.load')}}" method="post">
+                        <form id="form1" action="{{route('report.load')}}" method="post" style="line-height:1">
                             @csrf
                         <a onclick="document.getElementById('form1').submit();" class="small text-white stretched-link" type="submit">View Details</a>
                         </form>

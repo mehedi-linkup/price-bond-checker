@@ -14,7 +14,6 @@
                                     cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox" name="" id="all">All</th>
                                             <th>SL</th>
                                             <th>Lot Number</th>
                                             <th>Series No</th>
@@ -30,9 +29,6 @@
                                     <tbody>
                                         @foreach ($bondlist as $item)
                                             <tr>
-                                                <td><input type="checkbox" name="value[]"
-                                                        id="checkbox{{ $item->id }}" value="{{ $item->id }}">
-                                                </td>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>
                                                     @php
@@ -47,8 +43,8 @@
                                                     @endphp
                                                     {{ $seriesitem->series }}
                                                 </td>
-                                                <td class="text-left">{{ $item->bond_number }}</td>
-                                                <td class="text-left">{{ $item->price }}</td>
+                                                <td>{{ $item->bond_number }}</td>
+                                                <td>{{ $item->price }}</td>
                                                 <td>
                                                     @if ($item->status == 'p')
                                                         <span class="badge badge-warning">{{ 'Unsold' }}</span>
@@ -76,7 +72,7 @@
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable({
-          "lengthMenu": [100, 150, 200, 300, 'All']
+          "lengthMenu": [100, 200, 300, 500, 'All']
         });
       });
 </script>
